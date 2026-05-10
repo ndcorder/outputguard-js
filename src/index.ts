@@ -1,11 +1,19 @@
 import { OutputGuard } from "./guard.js";
-import type { FormatOptions, RepairOptions, ValidationResult, RepairResult, ValidationError } from "./types.js";
+import type {
+  FormatOptions,
+  RepairOptions,
+  RetryPromptOptions,
+  ValidationResult,
+  RepairResult,
+  ValidationError,
+} from "./types.js";
 
 // Re-export types
 export type {
   DataFormat,
   FormatOptions,
   RepairOptions,
+  RetryPromptOptions,
   ValidationResult,
   RepairResult,
   ValidationError,
@@ -78,7 +86,7 @@ export function retryPrompt(
   text: string,
   schema: Record<string, unknown>,
   errors: ValidationError[],
-  options: FormatOptions = {},
+  options: RetryPromptOptions = {},
 ): string {
   return defaultGuard.retryPrompt(text, schema, errors, options);
 }

@@ -249,6 +249,24 @@ describe("format support", () => {
     expect(prompt).toContain("age");
   });
 
+  it("CLI retry prompt can omit message history", () => {
+    const schemaPath = makeTempFile("outputguard-js-schema-", "schema.json", JSON.stringify(SIMPLE_SCHEMA));
+    const inputPath = makeTempFile("outputguard-js-input-", "invalid.json", '{"name":"Sensitive Name"}');
+
+    const result = runCli([
+      "retry-prompt",
+      inputPath,
+      "-s",
+      schemaPath,
+      "--no-message-history",
+    ]);
+
+    expect(result.status).toBe(0);
+    expect(result.stdout).not.toContain("Original output:");
+    expect(result.stdout).not.toContain("Sensitive Name");
+    expect(result.stdout).toContain("age");
+  });
+
   it("CLI validates supported formats", () => {
     const schemaPath = makeTempFile("outputguard-js-schema-", "schema.json", JSON.stringify(SIMPLE_SCHEMA));
     const inputPath = makeTempFile("outputguard-js-input-", "valid.yaml", FORMAT_CASES[1].validObject);

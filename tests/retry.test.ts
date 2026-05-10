@@ -42,4 +42,20 @@ describe("TestRetryPrompt", () => {
     expect(prompt).toContain("...");
     expect(prompt.length).toBeLessThan(longText.length + 500);
   });
+
+  it("can omit message history", () => {
+    const errors: ValidationError[] = [
+      { message: "err", path: "$", schemaPath: "" },
+    ];
+    const prompt = retryPrompt(
+      '{"secret": "do not repeat"}',
+      { type: "object" },
+      errors,
+      { includeMessageHistory: false },
+    );
+
+    expect(prompt).not.toContain("Original output:");
+    expect(prompt).not.toContain("do not repeat");
+    expect(prompt).toContain("err");
+  });
 });

@@ -1,5 +1,5 @@
 import { formatLabel } from "./formats.js";
-import type { FormatOptions, ValidationError } from "./types.js";
+import type { RetryPromptOptions, ValidationError } from "./types.js";
 
 function describeSchema(schema: Record<string, unknown>, depth = 0, maxDepth = 2): string[] {
   const lines: string[] = [];
@@ -48,7 +48,7 @@ export function retryPrompt(
   text: string,
   schema: Record<string, unknown>,
   errors: ValidationError[],
-  options: FormatOptions = {},
+  options: RetryPromptOptions = {},
 ): string {
   const label = formatLabel(options.format ?? "json");
   const parts: string[] = [
@@ -69,7 +69,11 @@ export function retryPrompt(
     parts.push(...schemaSummary);
   }
 
-  parts.push("", "Original output:", truncate(text), "", `Return ONLY the corrected ${label}.`);
+  if (options.includeMessageHistory ?? true) {
+    parts.push("", "Original output:", truncate(text));
+  }
+
+  parts.push("", `Return ONLY the corrected ${label}.`);
 
   return parts.join("\n");
 }

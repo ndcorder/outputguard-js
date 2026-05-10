@@ -72,6 +72,26 @@ describe("guardedGenerate", () => {
     expect(result.errors[0].path).toBe("$");
   });
 
+  it("can omit message history from retry prompts", async () => {
+    const prompts: string[] = [];
+
+    await guardedGenerate({
+      prompt: "Return user JSON",
+      schema,
+      maxRetries: 1,
+      includeMessageHistory: false,
+      generate: prompt => {
+        prompts.push(prompt);
+        return '{"name":"Sensitive Name"}';
+      },
+    });
+
+    expect(prompts).toHaveLength(2);
+    expect(prompts[1]).toContain("age");
+    expect(prompts[1]).not.toContain("Original output:");
+    expect(prompts[1]).not.toContain("Sensitive Name");
+  });
+
   it("supports OutputGuard defaults and per-attempt observers", async () => {
     const seenAttempts: number[] = [];
     const guard = new OutputGuard({ format: "yaml" });

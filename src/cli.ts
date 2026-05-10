@@ -68,7 +68,7 @@ ${BOLD}Usage:${RESET}
   outputguard validate <input> -s <schema> [--repair] [--input-format json|yaml|toml|python|auto|forced-json-off] [--format text|json] [--quiet] [--diff] [--verbose]
   outputguard repair <input> [--input-format json|yaml|toml|python|auto|forced-json-off] [--format text|json] [--strategies s1,s2] [--diff] [--verbose]
   outputguard batch <input> -s <schema> [--repair] [--input-format json|yaml|toml|python|auto|forced-json-off] [--format text|json]
-  outputguard retry-prompt <input> -s <schema> [--input-format json|yaml|toml|python|auto|forced-json-off]
+  outputguard retry-prompt <input> -s <schema> [--input-format json|yaml|toml|python|auto|forced-json-off] [--no-message-history]
   outputguard strategies
   outputguard version
   outputguard --help
@@ -83,6 +83,7 @@ ${BOLD}Options:${RESET}
   --input-format <format>   Input data format ${DIM}(default: json)${RESET}
   --format <text|json>      Command output format ${DIM}(default: text)${RESET}
   --strategies <s1,s2,...>  Comma-separated repair strategies
+  --no-message-history      Omit the original output from retry prompts
   --quiet                   Suppress non-essential output
   --diff                    Show diff of repairs
   --verbose                 Show detailed repair steps
@@ -259,6 +260,7 @@ async function cmdRetryPrompt(args: string[], flags: Record<string, string | boo
   const inputArg = args[0];
   const schemaPath = (flags.s ?? flags.schema) as string | undefined;
   const inputFormat = (flags["input-format"] as string) ?? "json";
+  const includeMessageHistory = flags["no-message-history"] !== true;
 
   if (!inputArg) {
     console.error(`${RED}Error: missing <input> argument${RESET}`);
@@ -279,7 +281,10 @@ async function cmdRetryPrompt(args: string[], flags: Record<string, string | boo
     return 0;
   }
 
-  const prompt = guard.retryPrompt(text, schema, result.errors);
+  const prompt = guard.retryPrompt(text, schema, result.errors, {
+    format: inputFormat,
+    includeMessageHistory,
+  });
   console.log(prompt);
   return 0;
 }

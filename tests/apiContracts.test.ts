@@ -815,6 +815,31 @@ describe("TestRetryPrompt", () => {
     expect(prompt).toContain("key");
   });
 
+  it("prompt can omit original output", () => {
+    const errors: ValidationError[] = [
+      { message: "err", path: "$", schemaPath: "" },
+    ];
+    const prompt = retryPrompt('{"key": "sensitive"}', OBJECT_SCHEMA, errors, {
+      includeMessageHistory: false,
+    });
+    expect(prompt).not.toContain("Original output:");
+    expect(prompt).not.toContain("sensitive");
+    expect(prompt).toContain("err");
+  });
+
+  it("guard method can omit original output", () => {
+    const guard = new OutputGuard();
+    const errors: ValidationError[] = [
+      { message: "err", path: "$", schemaPath: "" },
+    ];
+    const prompt = guard.retryPrompt('{"key": "sensitive"}', OBJECT_SCHEMA, errors, {
+      includeMessageHistory: false,
+    });
+    expect(prompt).not.toContain("Original output:");
+    expect(prompt).not.toContain("sensitive");
+    expect(prompt).toContain("err");
+  });
+
   it("prompt short input not truncated", () => {
     const shortText = '{"a": 1}';
     const errors: ValidationError[] = [

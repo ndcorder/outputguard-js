@@ -30,6 +30,10 @@ export interface FormatOptions {
   format?: string;
 }
 
+export interface RetryPromptOptions extends FormatOptions {
+  includeMessageHistory?: boolean;
+}
+
 export interface RepairOptions extends FormatOptions {
   report?: boolean;
 }

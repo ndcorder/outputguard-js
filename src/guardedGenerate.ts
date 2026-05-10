@@ -39,6 +39,7 @@ export interface GuardedGenerateOptions extends FormatOptions {
   guard?: OutputGuard;
   maxRetries?: number;
   repair?: boolean;
+  includeMessageHistory?: boolean;
   throwOnFailure?: boolean;
   onAttempt?: (attempt: GuardedGenerateAttempt) => void | Promise<void>;
 }
@@ -101,7 +102,10 @@ export async function guardedGenerate<T = unknown>(
     previousText = result.repairedText || rawText;
     previousResult = result;
     if (attemptNumber < maxRetries) {
-      prompt = guard.retryPrompt(previousText, options.schema, result.errors, { format });
+      prompt = guard.retryPrompt(previousText, options.schema, result.errors, {
+        format,
+        includeMessageHistory: options.includeMessageHistory,
+      });
     }
   }
 

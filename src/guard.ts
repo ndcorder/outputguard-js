@@ -3,7 +3,14 @@ import { repair } from "./repairer.js";
 import { retryPrompt } from "./retry.js";
 import { ParseError, SchemaValidationError } from "./exceptions.js";
 import { formatLabel } from "./formats.js";
-import type { FormatOptions, RepairOptions, ValidationResult, RepairResult, ValidationError } from "./types.js";
+import type {
+  FormatOptions,
+  RepairOptions,
+  RetryPromptOptions,
+  ValidationResult,
+  RepairResult,
+  ValidationError,
+} from "./types.js";
 import type { RepairReport } from "./report.js";
 
 export interface OutputGuardOptions {
@@ -101,8 +108,11 @@ export class OutputGuard {
     text: string,
     schema: Record<string, unknown>,
     errors: ValidationError[],
-    options: FormatOptions = {},
+    options: RetryPromptOptions = {},
   ): string {
-    return retryPrompt(text, schema, errors, { format: options.format ?? this.format });
+    return retryPrompt(text, schema, errors, {
+      format: options.format ?? this.format,
+      includeMessageHistory: options.includeMessageHistory,
+    });
   }
 }
