@@ -12,7 +12,7 @@
     }
   },
   "bin": {
-    "outputguard": "./dist/cli.js"
+    "outputguard": "dist/cli.js"
   },
   "files": [
     "dist",
@@ -43,7 +43,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ndcorder/outputguard-js.git"
+    "url": "git+https://github.com/ndcorder/outputguard-js.git"
   },
   "homepage": "https://github.com/ndcorder/outputguard-js#readme",
   "bugs": {
