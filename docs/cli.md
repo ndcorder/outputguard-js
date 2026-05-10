@@ -64,6 +64,12 @@ Generate feedback for an invalid output:
 outputguard retry-prompt response.txt --schema schema.json
 ```
 
+Omit the original output from the generated retry prompt:
+
+```bash
+outputguard retry-prompt response.txt --schema schema.json --no-message-history
+```
+
 ## Batch
 
 The batch command reads a JSON array of strings and validates each item against
@@ -99,6 +105,7 @@ outputguard version
 | `--diff` | Show a repair diff |
 | `--verbose` | Show per-strategy repair details |
 | `--strategies` | Comma-separated repair strategy names for `repair` |
+| `--no-message-history` | Omit the original output from `retry-prompt` output |
 
 Run `outputguard --help` for the exact options supported by the installed
 version.
@@ -119,4 +126,3 @@ validation or batch commands.
 JSON is the default. Pass `--input-format` whenever the prompt expected another
 format. Use `auto` for mixed historical output and `forced-json-off` when the
 prompt explicitly told the model not to return JSON.
-

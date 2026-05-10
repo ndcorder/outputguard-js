@@ -79,6 +79,22 @@ For each attempt, outputguard:
 The original prompt remains yours. outputguard only builds retry feedback when
 an attempt fails validation or repair.
 
+## Message History in Retry Prompts
+
+Retry prompts include the previous model output by default. That gives the model
+more context for fixing its own response, but it can add tokens or repeat data
+you do not want to send again. Pass `includeMessageHistory: false` to omit the
+`Original output:` section from generated retry prompts.
+
+```typescript
+const result = await guardedGenerate({
+  prompt: "Return a JSON object with name and score.",
+  schema,
+  generate: async prompt => callModel(prompt),
+  includeMessageHistory: false,
+});
+```
+
 ## Result Fields
 
 `guardedGenerate()` returns `GuardedGenerateResult`.
@@ -131,4 +147,3 @@ const result = await guardedGenerate({
   },
 });
 ```
-

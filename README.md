@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/v/outputguard)](https://www.npmjs.com/package/outputguard)
 [![CI](https://github.com/ndcorder/outputguard-js/actions/workflows/ci.yml/badge.svg)](https://github.com/ndcorder/outputguard-js/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-1180-brightgreen)](#)
+[![Tests](https://img.shields.io/badge/tests-1185-brightgreen)](#)
 
 ---
 
@@ -65,6 +65,10 @@ need exact behavior, API signatures, or command examples:
 
 - [API guide](docs/api.md) - choose the right function and understand result
   objects.
+- [Getting started](docs/getting-started.md) - first validation, repair, retry,
+  guarded generation, and CLI workflows.
+- [Concepts](docs/concepts.md) - the mental model behind parsing, validation,
+  repair, retries, and formats.
 - [Formats guide](docs/formats.md) - JSON, YAML, TOML, Python literals, `auto`,
   and `forced-json-off`.
 - [Guarded generation guide](docs/guarded-generation.md) - wrap an LLM call with
@@ -72,6 +76,11 @@ need exact behavior, API signatures, or command examples:
 - [Batch processing guide](docs/batch-processing.md) - validate or repair many
   outputs in one call or from the CLI.
 - [CLI guide](docs/cli.md) - commands, flags, examples, and exit codes.
+- [Recipes](docs/recipes.md) - copy-paste patterns for apps, evals, CI, and
+  privacy-sensitive retries.
+- [Troubleshooting](docs/troubleshooting.md) - common symptoms and fixes.
+- [Migration to 2.0](docs/migration-2.0.md) - compatibility notes and adoption
+  checklist.
 - [Changelog](CHANGELOG.md) - release notes and 2.0 migration notes.
 
 ## What's New in 2.0
@@ -213,7 +222,7 @@ async function getStructuredOutput(
 }
 ```
 
-The retry prompt tells the LLM exactly what went wrong - which fields are missing, which types are incorrect, and what the schema expects. Works with any LLM provider.
+The retry prompt tells the LLM exactly what went wrong - which fields are missing, which types are incorrect, and what the schema expects. Works with any LLM provider. By default it includes the previous model output under `Original output:`; pass `{ includeMessageHistory: false }` when you want retry prompts without that message history.
 
 ### Guarded Generation
 
@@ -237,7 +246,7 @@ if (result.valid) {
 }
 ```
 
-`guardedGenerate()` validates each generation, repairs when possible, feeds targeted retry prompts back to the generator, and returns every attempt for observability. Pass `repair: false` for strict validation-only loops or `throwOnFailure: true` when invalid output should reject with `GuardedGenerationError`.
+`guardedGenerate()` validates each generation, repairs when possible, feeds targeted retry prompts back to the generator, and returns every attempt for observability. Pass `repair: false` for strict validation-only loops, `includeMessageHistory: false` to omit prior model output from retry prompts, or `throwOnFailure: true` when invalid output should reject with `GuardedGenerationError`.
 
 ### Batch Processing
 
@@ -386,7 +395,7 @@ All commands accept `-` as input to read from stdin. Exit codes: `0` = valid/rep
 | `repair(text, options?)` | `RepairResult` | Auto-repair malformed structured output |
 | `validateAndRepair(text, schema, options?)` | `ValidationResult` | Validate, repair if needed, re-validate |
 | `parse(text, schema, options?)` | `unknown` | Parse and validate, throw on failure |
-| `retryPrompt(text, schema, errors, options?)` | `string` | Generate a correction prompt for the LLM |
+| `retryPrompt(text, schema, errors, options?)` | `string` | Generate a correction prompt for the LLM; set `includeMessageHistory: false` to omit prior output |
 | `guardedGenerate(options)` | `Promise<GuardedGenerateResult>` | Retry an arbitrary generator until output validates |
 | `validateBatch(texts, schema, options?)` | `BatchValidationResult` | Validate many outputs and return aggregate diagnostics |
 | `repairBatch(texts, options?)` | `BatchRepairResult` | Repair many outputs and return aggregate diagnostics |

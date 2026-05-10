@@ -161,6 +161,16 @@ if (!result.valid) {
 The returned string explains what failed and asks the model to try again with
 schema-compatible structured output.
 
+By default, the retry prompt includes the previous model output in an
+`Original output:` section. Turn that off when the prior output is too large or
+should not be sent back to the model:
+
+```typescript
+const prompt = retryPrompt(rawText, schema, result.errors, {
+  includeMessageHistory: false,
+});
+```
+
 ## `guardedGenerate()`
 
 Use this when you want outputguard to coordinate generation, validation, repair,
@@ -174,6 +184,7 @@ const result = await guardedGenerate({
   schema,
   format: "yaml",
   maxRetries: 2,
+  includeMessageHistory: false,
   generate: async (prompt, context) => {
     return callModel(prompt);
   },
