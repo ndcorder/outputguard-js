@@ -7,12 +7,13 @@ export interface ValidationError {
 
 export interface ValidationResult {
   valid: boolean;
-  data: Record<string, unknown> | unknown[] | null;
+  data: unknown;
   errors: ValidationError[];
   repaired: boolean;
   strategiesApplied: string[];
   originalText: string;
   repairedText: string;
+  format: string;
 }
 
 export interface RepairResult {
@@ -20,6 +21,17 @@ export interface RepairResult {
   text: string;
   strategiesApplied: string[];
   parseError: string | null;
+  format: string;
+}
+
+export type DataFormat = "json" | "yaml" | "toml" | "python" | "auto" | "forced-json-off";
+
+export interface FormatOptions {
+  format?: string;
+}
+
+export interface RepairOptions extends FormatOptions {
+  report?: boolean;
 }
 
 export type Strategy = (text: string) => string;

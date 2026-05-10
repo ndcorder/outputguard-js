@@ -1,4 +1,5 @@
-import type { ValidationError } from "./types.js";
+import { formatLabel } from "./formats.js";
+import type { FormatOptions, ValidationError } from "./types.js";
 
 function describeSchema(schema: Record<string, unknown>, depth = 0, maxDepth = 2): string[] {
   const lines: string[] = [];
@@ -47,10 +48,12 @@ export function retryPrompt(
   text: string,
   schema: Record<string, unknown>,
   errors: ValidationError[],
+  options: FormatOptions = {},
 ): string {
+  const label = formatLabel(options.format ?? "json");
   const parts: string[] = [
-    "The JSON output you provided does not match the required schema. " +
-    "Please fix the following errors and return ONLY valid JSON with " +
+    `The ${label} output you provided does not match the required schema. ` +
+    `Please fix the following errors and return ONLY valid ${label} with ` +
     "no additional text or markdown formatting:",
     "",
     "Errors found:",
@@ -66,7 +69,7 @@ export function retryPrompt(
     parts.push(...schemaSummary);
   }
 
-  parts.push("", "Original output:", truncate(text), "", "Return ONLY the corrected JSON.");
+  parts.push("", "Original output:", truncate(text), "", `Return ONLY the corrected ${label}.`);
 
   return parts.join("\n");
 }

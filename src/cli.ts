@@ -65,20 +65,23 @@ function printHelp(): void {
   console.log(`${BOLD}outputguard${RESET} — Validate, repair, and retry LLM structured outputs
 
 ${BOLD}Usage:${RESET}
-  outputguard validate <input> -s <schema> [--repair] [--format text|json] [--quiet] [--diff] [--verbose]
-  outputguard repair <input> [--format text|json] [--strategies s1,s2] [--diff] [--verbose]
-  outputguard retry-prompt <input> -s <schema>
+  outputguard validate <input> -s <schema> [--repair] [--input-format json|yaml|toml|python|auto|forced-json-off] [--format text|json] [--quiet] [--diff] [--verbose]
+  outputguard repair <input> [--input-format json|yaml|toml|python|auto|forced-json-off] [--format text|json] [--strategies s1,s2] [--diff] [--verbose]
+  outputguard batch <input> -s <schema> [--repair] [--input-format json|yaml|toml|python|auto|forced-json-off] [--format text|json]
+  outputguard retry-prompt <input> -s <schema> [--input-format json|yaml|toml|python|auto|forced-json-off]
   outputguard strategies
   outputguard version
   outputguard --help
 
 ${BOLD}Arguments:${RESET}
   <input>    File path or "-" for stdin
+             Batch input must be a JSON array of output strings
 
 ${BOLD}Options:${RESET}
   -s, --schema <file>       JSON Schema file path
-  --repair                  Attempt to repair invalid JSON
-  --format <text|json>      Output format ${DIM}(default: text)${RESET}
+  --repair                  Attempt to repair invalid structured output
+  --input-format <format>   Input data format ${DIM}(default: json)${RESET}
+  --format <text|json>      Command output format ${DIM}(default: text)${RESET}
   --strategies <s1,s2,...>  Comma-separated repair strategies
   --quiet                   Suppress non-essential output
   --diff                    Show diff of repairs
@@ -94,7 +97,8 @@ async function cmdValidate(args: string[], flags: Record<string, string | boolea
   const inputArg = args[0];
   const schemaPath = (flags.s ?? flags.schema) as string | undefined;
   const doRepair = flags.repair === true;
-  const format = (flags.format as string) ?? "text";
+  const outputFormat = (flags.format as string) ?? "text";
+  const inputFormat = (flags["input-format"] as string) ?? "json";
   const quiet = flags.quiet === true;
   const showDiff = flags.diff === true;
   const verbose = flags.verbose === true;
@@ -110,12 +114,12 @@ async function cmdValidate(args: string[], flags: Record<string, string | boolea
 
   const text = readInput(inputArg);
   const schema = JSON.parse(readFileSync(resolve(schemaPath as string), "utf-8"));
-  const guard = new OutputGuard();
+  const guard = new OutputGuard({ format: inputFormat });
 
   if (doRepair) {
     const result = guard.validateAndRepair(text, schema);
 
-    if (format === "json") {
+    if (outputFormat === "json") {
       console.log(JSON.stringify(result, null, 2));
       return result.valid ? 0 : 1;
     }
@@ -130,7 +134,7 @@ async function cmdValidate(args: string[], flags: Record<string, string | boolea
         console.log(`${DIM}Strategies: ${result.strategiesApplied.join(", ")}${RESET}`);
       }
       if (showDiff || verbose) {
-        const { result: repairResult, report } = guard.repair(text, { report: true });
+        const { report } = guard.repair(text, { report: true });
         if (showDiff) {
           console.log(`\n${BOLD}Diff:${RESET}`);
           console.log(getDiff(report));
@@ -157,7 +161,7 @@ async function cmdValidate(args: string[], flags: Record<string, string | boolea
   // Validate only (no repair)
   const result = guard.validate(text, schema);
 
-  if (format === "json") {
+  if (outputFormat === "json") {
     console.log(JSON.stringify(result, null, 2));
     return result.valid ? 0 : 1;
   }
@@ -181,7 +185,8 @@ async function cmdRepair(args: string[], flags: Record<string, string | boolean>
   const { getDiff, getStepDiffs, getConfidence } = await import("./report.js");
 
   const inputArg = args[0];
-  const format = (flags.format as string) ?? "text";
+  const outputFormat = (flags.format as string) ?? "text";
+  const inputFormat = (flags["input-format"] as string) ?? "json";
   const strategiesStr = flags.strategies as string | undefined;
   const showDiff = flags.diff === true;
   const verbose = flags.verbose === true;
@@ -193,12 +198,12 @@ async function cmdRepair(args: string[], flags: Record<string, string | boolean>
 
   const text = readInput(inputArg);
   const strategies = strategiesStr ? strategiesStr.split(",").map(s => s.trim()) : undefined;
-  const guard = new OutputGuard({ strategies });
+  const guard = new OutputGuard({ strategies, format: inputFormat });
 
   if (showDiff || verbose) {
     const { result, report } = guard.repair(text, { report: true });
 
-    if (format === "json") {
+    if (outputFormat === "json") {
       console.log(JSON.stringify({ result, report }, null, 2));
       return result.repaired ? 0 : 1;
     }
@@ -229,7 +234,7 @@ async function cmdRepair(args: string[], flags: Record<string, string | boolean>
 
   const result = guard.repair(text);
 
-  if (format === "json") {
+  if (outputFormat === "json") {
     console.log(JSON.stringify(result, null, 2));
     return result.repaired ? 0 : 1;
   }
@@ -253,6 +258,7 @@ async function cmdRetryPrompt(args: string[], flags: Record<string, string | boo
 
   const inputArg = args[0];
   const schemaPath = (flags.s ?? flags.schema) as string | undefined;
+  const inputFormat = (flags["input-format"] as string) ?? "json";
 
   if (!inputArg) {
     console.error(`${RED}Error: missing <input> argument${RESET}`);
@@ -265,7 +271,7 @@ async function cmdRetryPrompt(args: string[], flags: Record<string, string | boo
 
   const text = readInput(inputArg);
   const schema = JSON.parse(readFileSync(resolve(schemaPath as string), "utf-8"));
-  const guard = new OutputGuard();
+  const guard = new OutputGuard({ format: inputFormat });
   const result = guard.validate(text, schema);
 
   if (result.valid) {
@@ -276,6 +282,54 @@ async function cmdRetryPrompt(args: string[], flags: Record<string, string | boo
   const prompt = guard.retryPrompt(text, schema, result.errors);
   console.log(prompt);
   return 0;
+}
+
+async function cmdBatch(args: string[], flags: Record<string, string | boolean>): Promise<number> {
+  const { validateBatch } = await import("./batch.js");
+
+  const inputArg = args[0];
+  const schemaPath = (flags.s ?? flags.schema) as string | undefined;
+  const doRepair = flags.repair === true;
+  const outputFormat = (flags.format as string) ?? "text";
+  const inputFormat = (flags["input-format"] as string) ?? "json";
+
+  if (!inputArg) {
+    console.error(`${RED}Error: missing <input> argument${RESET}`);
+    return 2;
+  }
+  if (!schemaPath) {
+    console.error(`${RED}Error: missing --schema / -s argument${RESET}`);
+    return 2;
+  }
+
+  const parsed = JSON.parse(readInput(inputArg));
+  if (!Array.isArray(parsed) || parsed.some(item => typeof item !== "string")) {
+    console.error(`${RED}Error: batch input must be a JSON array of strings${RESET}`);
+    return 2;
+  }
+
+  const schema = JSON.parse(readFileSync(resolve(schemaPath), "utf-8"));
+  const batch = validateBatch(parsed, schema, { repair: doRepair, format: inputFormat });
+
+  if (outputFormat === "json") {
+    console.log(JSON.stringify(batch, null, 2));
+    return batch.summary.invalid === 0 ? 0 : 1;
+  }
+
+  const summary = batch.summary;
+  if (summary.invalid === 0) {
+    console.log(`${GREEN}✓ ${summary.valid}/${summary.total} valid${RESET}`);
+  } else {
+    console.log(`${YELLOW}! ${summary.valid}/${summary.total} valid, ${summary.invalid} invalid${RESET}`);
+  }
+  if (summary.repaired > 0) {
+    console.log(`${DIM}Repaired: ${summary.repaired}${RESET}`);
+  }
+  if (Object.keys(summary.strategyCounts).length > 0) {
+    console.log(`${DIM}Strategies: ${JSON.stringify(summary.strategyCounts)}${RESET}`);
+  }
+
+  return summary.invalid === 0 ? 0 : 1;
 }
 
 async function cmdStrategies(): Promise<number> {
@@ -313,6 +367,9 @@ async function main(): Promise<void> {
       break;
     case "repair":
       exitCode = await cmdRepair(args, flags);
+      break;
+    case "batch":
+      exitCode = await cmdBatch(args, flags);
       break;
     case "retry-prompt":
       exitCode = await cmdRetryPrompt(args, flags);

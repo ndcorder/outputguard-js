@@ -1,4 +1,5 @@
-import type { RepairResult } from "./types.js";
+import { FormatParseError, normalizeFormat, parseDocument } from "./formats.js";
+import type { RepairOptions, RepairResult } from "./types.js";
 import type { RepairReport, StrategyApplication } from "./report.js";
 import { createReport } from "./report.js";
 import { getStrategies } from "./strategies/index.js";
@@ -7,26 +8,32 @@ export function repair(text: string, strategies?: string[]): RepairResult;
 export function repair(
   text: string,
   strategies: string[] | undefined,
-  options: { report: true },
+  options: RepairOptions & { report: true },
 ): { result: RepairResult; report: RepairReport };
 export function repair(
   text: string,
+  strategies: string[] | undefined,
+  options: RepairOptions,
+): RepairResult;
+export function repair(
+  text: string,
   strategies?: string[],
-  options?: { report?: boolean },
+  options: RepairOptions = {},
 ): RepairResult | { result: RepairResult; report: RepairReport } {
+  const format = options.format ?? "json";
   // Try parsing as-is
-  const earlyParse = tryParse(text);
-  if (earlyParse !== null) {
+  if (tryParse(text, format)) {
     const result: RepairResult = {
       repaired: false,
       text,
       strategiesApplied: [],
       parseError: null,
+      format,
     };
     if (options?.report) {
       return {
         result,
-        report: createReport(text, text, true, [], null),
+        report: createReport(text, text, true, [], null, format),
       };
     }
     return result;
@@ -34,6 +41,45 @@ export function repair(
 
   const strategyList = getStrategies(strategies);
   const allSteps: StrategyApplication[] = [];
+
+  // Preserve non-JSON syntax when a generic strategy such as strip_fences is enough.
+  // JSON keeps the historical all-strategies first pass for compatibility.
+  if (!["json", "auto"].includes(normalizeFormat(format))) {
+    let current = text;
+    const preservingSteps: StrategyApplication[] = [];
+    const preservingApplied: string[] = [];
+
+    for (const strategy of strategyList) {
+      const before = current;
+      const after = strategy.apply(current);
+      const changed = after !== before;
+      if (changed) preservingApplied.push(strategy.name);
+      preservingSteps.push({
+        name: strategy.name,
+        changed,
+        inputText: before,
+        outputText: after,
+      });
+      current = after;
+
+      if (tryParse(current, format)) {
+        const result: RepairResult = {
+          repaired: true,
+          text: current,
+          strategiesApplied: preservingApplied,
+          parseError: null,
+          format,
+        };
+        if (options?.report) {
+          return {
+            result,
+            report: createReport(text, current, true, preservingSteps, null, format),
+          };
+        }
+        return result;
+      }
+    }
+  }
 
   // First pass: apply ALL strategies in sequence, track which changed
   let current = text;
@@ -56,24 +102,24 @@ export function repair(
   }
 
   // Try parsing after all strategies applied
-  const firstPassParse = tryParse(current);
-  if (firstPassParse !== null) {
+  if (tryParse(current, format)) {
     const result: RepairResult = {
       repaired: true,
       text: current,
       strategiesApplied: appliedNames,
       parseError: null,
+      format,
     };
     if (options?.report) {
       return {
         result,
-        report: createReport(text, current, true, allSteps, null),
+        report: createReport(text, current, true, allSteps, null, format),
       };
     }
     return result;
   }
 
-  // Second pass: apply one at a time, try JSON.parse between each
+  // Second pass: apply one at a time, try parsing between each
   current = text;
   const secondPassSteps: StrategyApplication[] = [];
   const secondPassApplied: string[] = [];
@@ -93,18 +139,18 @@ export function repair(
     });
     current = after;
 
-    const parsed = tryParse(current);
-    if (parsed !== null) {
+    if (tryParse(current, format)) {
       const result: RepairResult = {
         repaired: true,
         text: current,
         strategiesApplied: secondPassApplied,
         parseError: null,
+        format,
       };
       if (options?.report) {
         return {
           result,
-          report: createReport(text, current, true, secondPassSteps, null),
+          report: createReport(text, current, true, secondPassSteps, null, format),
         };
       }
       return result;
@@ -112,37 +158,38 @@ export function repair(
   }
 
   // All failed
-  const parseError = getParseError(current);
+  const parseError = getParseError(current, format);
   const result: RepairResult = {
     repaired: false,
     text: current,
     strategiesApplied: secondPassApplied,
     parseError,
+    format,
   };
   if (options?.report) {
     return {
       result,
-      report: createReport(text, current, false, secondPassSteps, parseError),
+      report: createReport(text, current, false, secondPassSteps, parseError, format),
     };
   }
   return result;
 }
 
-function tryParse(text: string): unknown | null {
+function tryParse(text: string, format: string): boolean {
   try {
-    JSON.parse(text);
+    parseDocument(text, format);
     return true;
   } catch {
-    return null;
+    return false;
   }
 }
 
-function getParseError(text: string): string {
+function getParseError(text: string, format: string): string {
   try {
-    JSON.parse(text);
+    parseDocument(text, format);
     return "";
   } catch (e: unknown) {
-    if (e instanceof SyntaxError) return e.message;
+    if (e instanceof SyntaxError || e instanceof FormatParseError) return e.message;
     return String(e);
   }
 }

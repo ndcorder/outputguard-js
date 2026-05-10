@@ -1,3 +1,5 @@
+import { formatLabel } from "./formats.js";
+
 export interface StrategyApplication {
   name: string;
   changed: boolean;
@@ -11,6 +13,7 @@ export interface RepairReport {
   success: boolean;
   steps: StrategyApplication[];
   parseError: string | null;
+  format: string;
 }
 
 export function createReport(
@@ -19,8 +22,9 @@ export function createReport(
   success: boolean,
   steps: StrategyApplication[] = [],
   parseError: string | null = null,
+  format = "json",
 ): RepairReport {
-  return { originalText, finalText, success, steps, parseError };
+  return { originalText, finalText, success, steps, parseError, format };
 }
 
 export function getStrategiesApplied(report: RepairReport): string[] {
@@ -86,6 +90,6 @@ export function getConfidence(report: RepairReport): number {
 export function getSummary(report: RepairReport): string {
   if (!report.success) return `Repair failed after trying ${report.steps.length} strategies`;
   const applied = getStrategiesApplied(report);
-  if (applied.length === 0) return "No repair needed — JSON was already valid";
+  if (applied.length === 0) return `No repair needed — ${formatLabel(report.format)} was already valid`;
   return `Repaired using ${applied.length} strategy(ies): ${applied.join(", ")}`;
 }

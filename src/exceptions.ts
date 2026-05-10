@@ -10,31 +10,41 @@ export class OutputGuardError extends Error {
 export class ParseError extends OutputGuardError {
   originalText: string;
   parseError: string | null;
+  format: string;
 
-  constructor(message: string, originalText: string, parseError: string | null = null) {
+  constructor(
+    message: string,
+    originalText: string,
+    parseError: string | null = null,
+    format = "json",
+  ) {
     super(message);
     this.name = "ParseError";
     this.originalText = originalText;
     this.parseError = parseError;
+    this.format = format;
   }
 }
 
 export class SchemaValidationError extends OutputGuardError {
-  data: Record<string, unknown> | unknown[];
+  data: unknown;
   validationErrors: ValidationError[];
   schema: Record<string, unknown>;
+  format: string;
 
   constructor(
     message: string,
-    data: Record<string, unknown> | unknown[],
+    data: unknown,
     errors: ValidationError[],
     schema: Record<string, unknown>,
+    format = "json",
   ) {
     super(message);
     this.name = "SchemaValidationError";
     this.data = data;
     this.validationErrors = errors;
     this.schema = schema;
+    this.format = format;
   }
 }
 

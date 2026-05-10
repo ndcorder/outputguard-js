@@ -1,6 +1,7 @@
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
-import type { ValidationError, ValidationResult } from "./types.js";
+import { FormatParseError, parseDocument } from "./formats.js";
+import type { FormatOptions, ValidationError, ValidationResult } from "./types.js";
 
 const ajv = new Ajv({ allErrors: true, strict: false });
 addFormats(ajv);
@@ -11,11 +12,17 @@ function ajvPathToJsonPath(path: string): string {
   return "$" + path.replace(/\/(\d+)/g, "[$1]").replace(/\//g, ".");
 }
 
-export function validate(text: string, schema: Record<string, unknown>): ValidationResult {
+export function validate(
+  text: string,
+  schema: Record<string, unknown>,
+  options: FormatOptions = {},
+): ValidationResult {
+  const format = options.format ?? "json";
   let data: unknown;
   try {
-    data = JSON.parse(text);
+    data = parseDocument(text, format);
   } catch (e) {
+    if (!(e instanceof FormatParseError)) throw e;
     return {
       valid: false,
       data: null,
@@ -28,6 +35,7 @@ export function validate(text: string, schema: Record<string, unknown>): Validat
       strategiesApplied: [],
       originalText: text,
       repairedText: "",
+      format,
     };
   }
 
@@ -48,11 +56,12 @@ export function validate(text: string, schema: Record<string, unknown>): Validat
 
   return {
     valid: errors.length === 0,
-    data: data as Record<string, unknown> | unknown[],
+    data,
     errors,
     repaired: false,
     strategiesApplied: [],
     originalText: text,
     repairedText: "",
+    format,
   };
 }

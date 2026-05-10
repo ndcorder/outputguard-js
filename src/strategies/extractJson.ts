@@ -5,8 +5,6 @@ export function apply(text: string): string {
   const start = findFirstBracket(text);
   if (start === -1) return text;
 
-  const opener = text[start];
-  const closer = opener === "{" ? "}" : "]";
   let depth = 0;
   let inString = false;
   let escaped = false;
