@@ -1,0 +1,1193 @@
+
+ RUN  v2.1.9 /Users/kexxt/code-opensource/outputguard-js
+
+ ✓ tests/strategies/fixInnerQuotes.test.ts > fix_inner_quotes > escapes inner quote in value
+ ✓ tests/strategies/fixInnerQuotes.test.ts > fix_inner_quotes > leaves properly escaped quotes
+ ✓ tests/strategies/fixInnerQuotes.test.ts > fix_inner_quotes > leaves valid JSON unchanged
+ ✓ tests/strategies/fixInnerQuotes.test.ts > fix_inner_quotes > handles key without inner quotes
+ ✓ tests/strategies/fixInnerQuotes.test.ts > fix_inner_quotes > handles multiple fields
+ ✓ tests/exceptions.test.ts > TestExceptions > parse error
+ ✓ tests/exceptions.test.ts > TestExceptions > schema validation error
+ ✓ tests/exceptions.test.ts > TestExceptions > repair error
+ ✓ tests/exceptions.test.ts > TestExceptions > hierarchy
+ ✓ tests/report.test.ts > TestReport > no repair needed
+ ✓ tests/report.test.ts > TestReport > single strategy
+ ✓ tests/report.test.ts > TestReport > multiple strategies
+ ✓ tests/report.test.ts > TestReport > failure
+ ✓ tests/report.test.ts > TestReport > strategy application diff — changed
+ ✓ tests/report.test.ts > TestReport > strategy application diff — no change
+ ✓ tests/report.test.ts > TestReport > step diffs multi strategy
+ ✓ tests/retry.test.ts > TestRetryPrompt > contains errors
+ ✓ tests/retry.test.ts > TestRetryPrompt > contains schema summary
+ ✓ tests/retry.test.ts > TestRetryPrompt > long output truncated
+ ✓ tests/validator.test.ts > validator > valid json
+ ✓ tests/validator.test.ts > validator > invalid type
+ ✓ tests/validator.test.ts > validator > missing required
+ ✓ tests/validator.test.ts > validator > invalid json
+ ✓ tests/repairer.test.ts > repairer > already valid
+ ✓ tests/repairer.test.ts > repairer > markdown fenced
+ ✓ tests/repairer.test.ts > repairer > commentary
+ ✓ tests/repairer.test.ts > repairer > multiple issues
+ ✓ tests/repairer.test.ts > repairer > unrepairable
+ ✓ tests/integration.test.ts > integration > fenced with trailing comma
+ ✓ tests/integration.test.ts > integration > commentary with unquoted keys
+ ✓ tests/integration.test.ts > integration > missing closer
+ ✓ tests/integration.test.ts > integration > python booleans
+ ✓ tests/integration.test.ts > integration > already valid
+ ✓ tests/integration.test.ts > integration > completely broken
+ ✓ tests/integration.test.ts > integration > parse convenience
+ ✓ tests/integration.test.ts > integration > parse throws on garbage
+ ✓ tests/integration.test.ts > integration > kitchen sink
+ ✓ tests/edgeCases.test.ts > TestRealWorldLLMOutputs > chatgpt_style_preamble
+ ✓ tests/edgeCases.test.ts > TestRealWorldLLMOutputs > claude_style_thinking
+ ✓ tests/edgeCases.test.ts > TestRealWorldLLMOutputs > llm_explains_after_json
+ ✓ tests/edgeCases.test.ts > TestRealWorldLLMOutputs > python_dict_literal
+ ✓ tests/edgeCases.test.ts > TestRealWorldLLMOutputs > python_dict_with_booleans
+ ✓ tests/edgeCases.test.ts > TestRealWorldLLMOutputs > javascript_object_literal
+ ✓ tests/edgeCases.test.ts > TestRealWorldLLMOutputs > json_with_comments_and_trailing_commas
+ ✓ tests/edgeCases.test.ts > TestRealWorldLLMOutputs > multiple_json_blocks_takes_first
+ ✓ tests/edgeCases.test.ts > TestRealWorldLLMOutputs > json_with_nan_and_infinity
+ ✓ tests/edgeCases.test.ts > TestRealWorldLLMOutputs > deeply_nested_repair
+ ✓ tests/edgeCases.test.ts > TestRealWorldLLMOutputs > json_in_bullet_point
+ ✓ tests/edgeCases.test.ts > TestRealWorldLLMOutputs > large_array_with_issues
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > empty_string
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > only_whitespace
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > only_braces
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > only_brackets
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > nested_empty
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > very_deep_nesting
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > special_characters_in_strings
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > url_in_value
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > html_in_value
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > multiline_string_value
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > json_number_edge_cases
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > null_values
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > boolean_values
+ ✓ tests/edgeCases.test.ts > TestAdversarialInputs > mixed_array
+ ✓ tests/edgeCases.test.ts > TestStrategyInteractions > fences_plus_comments_plus_trailing_comma
+ ✓ tests/edgeCases.test.ts > TestStrategyInteractions > extract_plus_quotes_plus_keys
+ ✓ tests/edgeCases.test.ts > TestStrategyInteractions > all_strategies_combined
+ ✓ tests/edgeCases.test.ts > TestStrategyInteractions > repair_preserves_data_integrity
+ ✓ tests/edgeCases.test.ts > TestEdgeCasesInStrategies > fence_with_extra_whitespace
+ ✓ tests/edgeCases.test.ts > TestEdgeCasesInStrategies > fence_with_no_newline
+ ✓ tests/edgeCases.test.ts > TestEdgeCasesInStrategies > single_quote_with_escaped_apostrophe
+ ✓ tests/edgeCases.test.ts > TestEdgeCasesInStrategies > single_quote_with_inner_double_quote
+ ✓ tests/edgeCases.test.ts > TestEdgeCasesInStrategies > comment_in_url_string
+ ✓ tests/edgeCases.test.ts > TestEdgeCasesInStrategies > keys_with_dollar_sign
+ ✓ tests/edgeCases.test.ts > TestEdgeCasesInStrategies > closers_with_strings_containing_braces
+ ✓ tests/edgeCases.test.ts > TestEdgeCasesInStrategies > values_nan_in_string
+ ✓ tests/edgeCases.test.ts > TestEdgeCasesInStrategies > commas_in_strings_preserved
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: json
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: JSON
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: jsonc
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: javascript
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: js
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: typescript
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: ts
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: python
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: py
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: yaml
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: xml
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: html
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: css
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: sql
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: plaintext
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > every language tag: 
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > nested fences
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > windows line endings
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > trailing whitespace after closing fence
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > indented closing fence
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > multiple fences takes first
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > fence with empty content
+ ✓ tests/strategyExhaustive.test.ts > TestStripFences > fence with only whitespace content
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > json preceded by numbered list
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > json preceded by bullet points
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > json inside markdown blockquote
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > json after label: Output: 
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > json after label: Result: 
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > json after label: Answer: 
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > json after label: Response: 
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > json after label: Here is the JSON: 
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > multiple json objects takes first
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > json with brace strings
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > array of objects
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > deeply nested 10 levels
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > json with escaped quotes
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > very large json
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > no json at all
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > array only
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > json with newlines inside
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > string containing brackets
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > empty object
+ ✓ tests/strategyExhaustive.test.ts > TestExtractJson > empty array
+ ✓ tests/strategyExhaustive.test.ts > TestRemoveComments > comment at very start
+ ✓ tests/strategyExhaustive.test.ts > TestRemoveComments > comment at very end
+ ✓ tests/strategyExhaustive.test.ts > TestRemoveComments > multiple single line comments
+ ✓ tests/strategyExhaustive.test.ts > TestRemoveComments > multiline comment spanning 5 lines
+ ✓ tests/strategyExhaustive.test.ts > TestRemoveComments > comment like patterns inside strings
+ ✓ tests/strategyExhaustive.test.ts > TestRemoveComments > empty comment
+ ✓ tests/strategyExhaustive.test.ts > TestRemoveComments > comment with special chars
+ ✓ tests/strategyExhaustive.test.ts > TestRemoveComments > nested looking comments
+ ✓ tests/strategyExhaustive.test.ts > TestRemoveComments > mixed single and multiline comments
+ ✓ tests/strategyExhaustive.test.ts > TestRemoveComments > url in string not stripped
+ ✓ tests/strategyExhaustive.test.ts > TestRemoveComments > comment between key and value
+ ✓ tests/strategyExhaustive.test.ts > TestRemoveComments > block comment with stars inside
+ ✓ tests/strategyExhaustive.test.ts > TestFixCommas > multiple consecutive trailing commas
+ ✓ tests/strategyExhaustive.test.ts > TestFixCommas > deeply nested trailing comma
+ ✓ tests/strategyExhaustive.test.ts > TestFixCommas > comma followed by newline then closer
+ ✓ tests/strategyExhaustive.test.ts > TestFixCommas > multiple trailing commas in array
+ ✓ tests/strategyExhaustive.test.ts > TestFixCommas > comma in string values preserved
+ ✓ tests/strategyExhaustive.test.ts > TestFixCommas > no trailing comma unchanged
+ ✓ tests/strategyExhaustive.test.ts > TestFixCommas > trailing comma in array of objects
+ ✓ tests/strategyExhaustive.test.ts > TestFixCommas > trailing comma with spaces
+ ✓ tests/strategyExhaustive.test.ts > TestFixCommas > comma before bracket in nested array
+ ✓ tests/strategyExhaustive.test.ts > TestFixQuotes > single quoted with apostrophe
+ ✓ tests/strategyExhaustive.test.ts > TestFixQuotes > single quoted containing double quote
+ ✓ tests/strategyExhaustive.test.ts > TestFixQuotes > mixed quoting styles
+ ✓ tests/strategyExhaustive.test.ts > TestFixQuotes > empty single quoted string
+ ✓ tests/strategyExhaustive.test.ts > TestFixQuotes > single quoted with backslash
+ ✓ tests/strategyExhaustive.test.ts > TestFixQuotes > nested single quoted objects
+ ✓ tests/strategyExhaustive.test.ts > TestFixQuotes > single quoted array elements
+ ✓ tests/strategyExhaustive.test.ts > TestFixQuotes > single quoted numbers and booleans
+ ✓ tests/strategyExhaustive.test.ts > TestFixQuotes > all double quoted unchanged
+ ✓ tests/strategyExhaustive.test.ts > TestFixQuotes > single quoted with colon in value
+ ✓ tests/strategyExhaustive.test.ts > TestFixQuotes > single quoted with comma in value
+ ✓ tests/strategyExhaustive.test.ts > TestFixKeys > keys with special chars: $id
+ ✓ tests/strategyExhaustive.test.ts > TestFixKeys > keys with special chars: _private
+ ✓ tests/strategyExhaustive.test.ts > TestFixKeys > keys with special chars: my.dotted.key
+ ✓ tests/strategyExhaustive.test.ts > TestFixKeys > keys with special chars: hyphen-key
+ ✓ tests/strategyExhaustive.test.ts > TestFixKeys > js keyword keys
+ ✓ tests/strategyExhaustive.test.ts > TestFixKeys > number keys
+ ✓ tests/strategyExhaustive.test.ts > TestFixKeys > unicode key
+ ✓ tests/strategyExhaustive.test.ts > TestFixKeys > already quoted mixed with unquoted
+ ✓ tests/strategyExhaustive.test.ts > TestFixKeys > deeply nested unquoted keys
+ ✓ tests/strategyExhaustive.test.ts > TestFixKeys > key with url like value
+ ✓ tests/strategyExhaustive.test.ts > TestFixKeys > key with dollar prefix
+ ✓ tests/strategyExhaustive.test.ts > TestFixValues > multiple nan infinity
+ ✓ tests/strategyExhaustive.test.ts > TestFixValues > nan in array
+ ✓ tests/strategyExhaustive.test.ts > TestFixValues > infinity as only value
+ ✓ tests/strategyExhaustive.test.ts > TestFixValues > nan inside string preserved
+ ✓ tests/strategyExhaustive.test.ts > TestFixValues > infinity inside string preserved
+ ✓ tests/strategyExhaustive.test.ts > TestFixValues > undefined inside string preserved
+ ✓ tests/strategyExhaustive.test.ts > TestFixValues > undefined in array
+ ✓ tests/strategyExhaustive.test.ts > TestFixValues > negative infinity
+ ✓ tests/strategyExhaustive.test.ts > TestFixValues > mixed valid and invalid values
+ ✓ tests/strategyExhaustive.test.ts > TestFixBooleans > true false none in arrays
+ ✓ tests/strategyExhaustive.test.ts > TestFixBooleans > nested python booleans
+ ✓ tests/strategyExhaustive.test.ts > TestFixBooleans > mixed python and json booleans
+ ✓ tests/strategyExhaustive.test.ts > TestFixBooleans > in string preserved
+ ✓ tests/strategyExhaustive.test.ts > TestFixBooleans > none vs null
+ ✓ tests/strategyExhaustive.test.ts > TestFixBooleans > all python booleans
+ ✓ tests/strategyExhaustive.test.ts > TestFixBooleans > already valid json unchanged
+ ✓ tests/strategyExhaustive.test.ts > TestFixBooleans > boolean in nested array
+ ✓ tests/strategyExhaustive.test.ts > TestFixBooleans > true false adjacent to punctuation
+ ✓ tests/strategyExhaustive.test.ts > TestFixBooleans > none in string preserved
+ ✓ tests/strategyExhaustive.test.ts > TestFixTruncated > truncated in middle of number
+ ✓ tests/strategyExhaustive.test.ts > TestFixTruncated > truncated in middle of boolean
+ ✓ tests/strategyExhaustive.test.ts > TestFixTruncated > truncated in middle of null
+ ✓ tests/strategyExhaustive.test.ts > TestFixTruncated > truncated inside array element
+ ✓ tests/strategyExhaustive.test.ts > TestFixTruncated > truncated with nothing after key
+ ✓ tests/strategyExhaustive.test.ts > TestFixTruncated > truncated inside nested object key
+ ✓ tests/strategyExhaustive.test.ts > TestFixTruncated > only opening brace
+ ✓ tests/strategyExhaustive.test.ts > TestFixTruncated > opening brace and key
+ ✓ tests/strategyExhaustive.test.ts > TestFixTruncated > truncated string value
+ ✓ tests/strategyExhaustive.test.ts > TestFixTruncated > truncated after comma
+ ✓ tests/strategyExhaustive.test.ts > TestFixTruncated > truncated nested array
+ ✓ tests/strategyExhaustive.test.ts > TestFixTruncated > valid json unchanged
+ ✓ tests/strategyExhaustive.test.ts > TestFixClosers > missing 3 levels of closers
+ ✓ tests/strategyExhaustive.test.ts > TestFixClosers > missing bracket but not brace
+ ✓ tests/strategyExhaustive.test.ts > TestFixClosers > missing brace but not bracket
+ ✓ tests/strategyExhaustive.test.ts > TestFixClosers > braces inside strings dont count
+ ✓ tests/strategyExhaustive.test.ts > TestFixClosers > already balanced
+ ✓ tests/strategyExhaustive.test.ts > TestFixClosers > deeply nested missing closers
+ ✓ tests/strategyExhaustive.test.ts > TestFixClosers > missing array closer only
+ ✓ tests/strategyExhaustive.test.ts > TestFixClosers > empty nested structures
+ ✓ tests/strategyExhaustive.test.ts > TestFixNewlines > multiple newlines in one string
+ ✓ tests/strategyExhaustive.test.ts > TestFixNewlines > carriage return and newline
+ ✓ tests/strategyExhaustive.test.ts > TestFixNewlines > tab characters
+ ✓ tests/strategyExhaustive.test.ts > TestFixNewlines > newlines in keys
+ ✓ tests/strategyExhaustive.test.ts > TestFixNewlines > multiple strings with newlines
+ ✓ tests/strategyExhaustive.test.ts > TestFixNewlines > already escaped newlines preserved
+ ✓ tests/strategyExhaustive.test.ts > TestFixNewlines > no newlines unchanged
+ ✓ tests/strategyExhaustive.test.ts > TestFixNewlines > newline at end of string value
+ ✓ tests/strategyExhaustive.test.ts > TestFixEllipsis > multiple ellipsis in one object
+ ✓ tests/strategyExhaustive.test.ts > TestFixEllipsis > ellipsis as array element among valid
+ ✓ tests/strategyExhaustive.test.ts > TestFixEllipsis > ellipsis with comment
+ ✓ tests/strategyExhaustive.test.ts > TestFixEllipsis > ellipsis in string preserved
+ ✓ tests/strategyExhaustive.test.ts > TestFixEllipsis > ellipsis only in object
+ ✓ tests/strategyExhaustive.test.ts > TestFixEllipsis > ellipsis only in array
+ ✓ tests/strategyExhaustive.test.ts > TestFixEllipsis > ellipsis as value
+ ✓ tests/strategyExhaustive.test.ts > TestFixEllipsis > ellipsis at end of array
+ ✓ tests/strategyExhaustive.test.ts > TestFixUnicode > multiple hex escapes in one string
+ ✓ tests/strategyExhaustive.test.ts > TestFixUnicode > x00 null byte
+ ✓ tests/strategyExhaustive.test.ts > TestFixUnicode > printable ascii hex
+ ✓ tests/strategyExhaustive.test.ts > TestFixUnicode > mixed valid and invalid unicode
+ ✓ tests/strategyExhaustive.test.ts > TestFixUnicode > consecutive hex escapes spelling hello
+ ✓ tests/strategyExhaustive.test.ts > TestFixUnicode > incomplete unicode escape
+ ✓ tests/strategyExhaustive.test.ts > TestFixUnicode > valid unicode unchanged
+ ✓ tests/strategyExhaustive.test.ts > TestFixUnicode > no escapes unchanged
+ ✓ tests/strategyExhaustive.test.ts > TestFixInnerQuotes > inner quotes at start of value
+ ✓ tests/strategyExhaustive.test.ts > TestFixInnerQuotes > inner quotes at end of value
+ ✓ tests/strategyExhaustive.test.ts > TestFixInnerQuotes > multiple inner quote pairs
+ ✓ tests/strategyExhaustive.test.ts > TestFixInnerQuotes > inner quotes with special chars
+ ✓ tests/strategyExhaustive.test.ts > TestFixInnerQuotes > value entirely inner quoted
+ ✓ tests/strategyExhaustive.test.ts > TestFixInnerQuotes > adjacent to comma
+ ✓ tests/strategyExhaustive.test.ts > TestFixInnerQuotes > no inner quotes unchanged
+ ✓ tests/strategyExhaustive.test.ts > TestFixInnerQuotes > key with quotes not affected
+ ✓ tests/strategyExhaustive.test.ts > TestFixInnerQuotes > empty value unchanged
+ ✓ tests/strategyExhaustive.test.ts > TestFixInnerQuotes > multiple keys with inner quotes
+ ✓ tests/guard.test.ts > OutputGuard > validateAndRepair repairable
+ ✓ tests/guard.test.ts > OutputGuard > validateAndRepair unrepairable
+ ✓ tests/guard.test.ts > OutputGuard > validateAndRepair already valid
+ ✓ tests/guard.test.ts > OutputGuard > parse valid
+ ✓ tests/guard.test.ts > OutputGuard > parse repairable
+ ✓ tests/guard.test.ts > OutputGuard > parse throws ParseError
+ ✓ tests/guard.test.ts > OutputGuard > parse throws SchemaValidationError
+ ✓ tests/guard.test.ts > OutputGuard > custom strategies
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > json fence despite instructions
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > here is the json preamble
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > trailing explanation
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > json with line comments
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > trailing commas in arrays
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > truncated large response
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > multiple json blocks with explanations
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > typescript fence
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > note after json
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > json in numbered list
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > sure preamble
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > block comment in json
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > trailing comma in object
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > preamble and fence combined
+ ✓ tests/llmCorpus.test.ts > TestChatGPTPatterns > response with markdown bold
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > thinking preamble
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > ill create preamble
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > bare backtick fence
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > python dict true false none
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > json fence extra newlines
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > heres the json response
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > explanation paragraphs above and below
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > markdown heading before json
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > thinking tags then json
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > bullet points before json
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > xml artifact wrapper
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > indented json in explanation
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > trailing comma in nested
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > heres what i came up with
+ ✓ tests/llmCorpus.test.ts > TestClaudePatterns > double newline fence
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > everything in markdown fences
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > output prefix
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > single quotes python style
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > python booleans mixed with json
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > i hope this helps suffix
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > truncated mid string
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > python dict literal
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > blank lines inside json
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > prompt repeated before answer
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > answer prefix
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > result prefix
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > json with none values
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > trailing newlines
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > response prefix
+ ✓ tests/llmCorpus.test.ts > TestLlamaPatterns > triple backtick same line
+ ✓ tests/llmCorpus.test.ts > TestDeepSeekPatterns > always json fences
+ ✓ tests/llmCorpus.test.ts > TestDeepSeekPatterns > extra newlines after fence
+ ✓ tests/llmCorpus.test.ts > TestDeepSeekPatterns > trailing commas frequent
+ ✓ tests/llmCorpus.test.ts > TestDeepSeekPatterns > nested trailing commas
+ ✓ tests/llmCorpus.test.ts > TestDeepSeekPatterns > thinking block
+ ✓ tests/llmCorpus.test.ts > TestDeepSeekPatterns > fenced with trailing comma
+ ✓ tests/llmCorpus.test.ts > TestDeepSeekPatterns > comments inside fence
+ ✓ tests/llmCorpus.test.ts > TestDeepSeekPatterns > extra whitespace
+ ✓ tests/llmCorpus.test.ts > TestDeepSeekPatterns > truncated array
+ ✓ tests/llmCorpus.test.ts > TestDeepSeekPatterns > preamble and fence
+ ✓ tests/llmCorpus.test.ts > TestMistralPatterns > unquoted keys js style
+ ✓ tests/llmCorpus.test.ts > TestMistralPatterns > undefined mixed with null
+ ✓ tests/llmCorpus.test.ts > TestMistralPatterns > commentary text around json
+ ✓ tests/llmCorpus.test.ts > TestMistralPatterns > nan for missing numeric
+ ✓ tests/llmCorpus.test.ts > TestMistralPatterns > truncated mid array
+ ✓ tests/llmCorpus.test.ts > TestMistralPatterns > mixed quotes and unquoted keys
+ ✓ tests/llmCorpus.test.ts > TestMistralPatterns > trailing text with fence
+ ✓ tests/llmCorpus.test.ts > TestMistralPatterns > json in paragraph
+ ✓ tests/llmCorpus.test.ts > TestMistralPatterns > infinity value
+ ✓ tests/llmCorpus.test.ts > TestMistralPatterns > multiple unquoted keys
+ ✓ tests/llmCorpus.test.ts > TestGeminiPatterns > bare array when object asked
+ ✓ tests/llmCorpus.test.ts > TestGeminiPatterns > json fences
+ ✓ tests/llmCorpus.test.ts > TestGeminiPatterns > heres the result preamble
+ ✓ tests/llmCorpus.test.ts > TestGeminiPatterns > infinity for large numbers
+ ✓ tests/llmCorpus.test.ts > TestGeminiPatterns > line comments in json
+ ✓ tests/llmCorpus.test.ts > TestGeminiPatterns > trailing comma nested
+ ✓ tests/llmCorpus.test.ts > TestGeminiPatterns > response label
+ ✓ tests/llmCorpus.test.ts > TestGeminiPatterns > bold key labels
+ ✓ tests/llmCorpus.test.ts > TestGeminiPatterns > javascript fence
+ ✓ tests/llmCorpus.test.ts > TestGeminiPatterns > preamble with schema echo
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > mixed python and json syntax
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > incomplete truncated json
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > backtick on same line
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > ellipsis abbreviated content
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > undefined for missing
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > json followed by python explanation
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > consecutive commas
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > jsonc block comments
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > key equals value no crash
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > mixed quoted and unquoted keys
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > python none
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > single quotes nested
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > output label and fence
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > negative infinity
+ ✓ tests/llmCorpus.test.ts > TestLocalModelPatterns > truncated deeply nested
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > sentiment analysis fenced
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > data extraction with commentary
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > classification python style
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > code review with thinking
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > translation with special chars
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > summarization unquoted keys
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > function call response fenced
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > tool use with preamble
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > structured extraction trailing comma
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > quiz generation with comments
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > recipe generation python booleans
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > product description mixed issues
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > calendar event with commentary
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > email parsing response
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > api schema unquoted keys and comments
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > resume parsing nested python style
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > error report with nan
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > db query result truncated
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > config generation with all issues
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > chatbot intent classification
+ ✓ tests/llmCorpus.test.ts > TestRealWorldPromptResponses > multilabel classification trailing
+ ✓ tests/llmCorpus.test.ts > TestValidateAndRepairIntegration > fenced json with schema
+ ✓ tests/llmCorpus.test.ts > TestValidateAndRepairIntegration > python booleans with schema
+ ✓ tests/llmCorpus.test.ts > TestValidateAndRepairIntegration > trailing comma array with schema
+ ✓ tests/llmCorpus.test.ts > TestValidateAndRepairIntegration > preamble and comments with schema
+ ✓ tests/llmCorpus.test.ts > TestValidateAndRepairIntegration > unquoted keys with schema
+ ✓ tests/llmCorpus.test.ts > TestValidateAndRepairIntegration > python dict with schema
+ ✓ tests/llmCorpus.test.ts > TestValidateAndRepairIntegration > truncated with schema
+ ✓ tests/llmCorpus.test.ts > TestValidateAndRepairIntegration > full pipeline complex
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > fences+commas
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > fences+quotes
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > fences+keys
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > fences+booleans
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > fences+closers
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > fences+values
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > fences+comments
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > fences+newlines
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > fences+unicode
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > fences+ellipsis
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > extract+quotes
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > extract+keys
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > extract+booleans
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > extract+commas
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > extract+values
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > comments+commas
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > comments+keys
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > comments+quotes
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > comments+booleans
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > comments+values
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > quotes+keys
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > quotes+booleans
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > quotes+commas
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > keys+commas
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > keys+booleans
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > keys+values
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > values+closers
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > booleans+commas
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > booleans+closers
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > commas+closers
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > truncated+commas
+ ✓ tests/combinations.test.ts > TestTwoStrategyCombinations > newlines+quotes
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > fences+quotes+commas
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > fences+keys+booleans
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > fences+comments+commas
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > fences+keys+commas
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > fences+quotes+booleans
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > fences+values+commas
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > fences+keys+values
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > extract+quotes+keys
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > extract+keys+booleans
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > extract+quotes+commas
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > comments+quotes+commas
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > comments+keys+values
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > comments+keys+commas
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > quotes+keys+commas
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > quotes+keys+booleans
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > keys+booleans+commas
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > keys+values+commas
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > fences+comments+keys
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > extract+comments+commas
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > booleans+values+commas
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > fences+quotes+keys+booleans
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > fences+keys+commas+values
+ ✓ tests/combinations.test.ts > TestThreeStrategyCombinations > fences+quotes+keys+booleans+commas
+ ✓ tests/combinations.test.ts > TestKitchenSink > llm_full_mess
+ ✓ tests/combinations.test.ts > TestKitchenSink > js_object_full
+ ✓ tests/combinations.test.ts > TestKitchenSink > fences+python+truncated
+ ✓ tests/combinations.test.ts > TestKitchenSink > fences+keys+vals+bools+commas
+ ✓ tests/combinations.test.ts > TestKitchenSink > extract_everything
+ ✓ tests/combinations.test.ts > TestKitchenSink > deep_nesting
+ ✓ tests/combinations.test.ts > TestKitchenSink > array_mixed
+ ✓ tests/combinations.test.ts > TestKitchenSink > commentary_array_fenced
+ ✓ tests/combinations.test.ts > TestKitchenSink > keys_quotes_comments_commas
+ ✓ tests/combinations.test.ts > TestKitchenSink > fences_comments_keys_bools_commas
+ ✓ tests/combinations.test.ts > TestKitchenSink > extract_quotes_bools_commas
+ ✓ tests/combinations.test.ts > TestKitchenSink > max_strategies
+ ✓ tests/combinations.test.ts > TestStrategyOrdering > fences before extract
+ ✓ tests/combinations.test.ts > TestStrategyOrdering > comments before commas
+ ✓ tests/combinations.test.ts > TestStrategyOrdering > quotes before keys
+ ✓ tests/combinations.test.ts > TestStrategyOrdering > fences then quotes then commas
+ ✓ tests/combinations.test.ts > TestStrategyOrdering > fences then keys then booleans
+ ✓ tests/combinations.test.ts > TestStrategyOrdering > comments then keys then values
+ ✓ tests/combinations.test.ts > TestStrategyOrdering > extract then quotes
+ ✓ tests/combinations.test.ts > TestStrategyOrdering > extract then keys then booleans
+ ✓ tests/combinations.test.ts > TestStrategyOrdering > fences then comments then commas
+ ✓ tests/combinations.test.ts > TestStrategyOrdering > fences then extract priority
+ ✓ tests/combinations.test.ts > TestStrategyOrdering > closers after all content fixes
+ ✓ tests/combinations.test.ts > TestStrategyOrdering > booleans independent of commas
+ ✓ tests/combinations.test.ts > TestCustomStrategySelection > subset strategies fixes targeted
+ ✓ tests/combinations.test.ts > TestCustomStrategySelection > subset strategies skips others
+ ✓ tests/combinations.test.ts > TestCustomStrategySelection > single strategy fix commas
+ ✓ tests/combinations.test.ts > TestCustomStrategySelection > single strategy fix booleans
+ ✓ tests/combinations.test.ts > TestCustomStrategySelection > single strategy fix keys
+ ✓ tests/combinations.test.ts > TestCustomStrategySelection > single strategy fix quotes
+ ✓ tests/combinations.test.ts > TestCustomStrategySelection > empty strategy list
+ ✓ tests/combinations.test.ts > TestCustomStrategySelection > two strategies only
+ ✓ tests/combinations.test.ts > TestCustomStrategySelection > two strategies missing needed
+ ✓ tests/combinations.test.ts > TestCustomStrategySelection > all strategies explicit
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: fenced
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: single_quotes
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: keys+values+commas
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: commentary+keys+quotes+bools
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: comments+commas
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: truncated_array
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: fenced_kitchen_sink
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: python_bools
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: keys+nan_value
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: undefined_value
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: fenced_trailing_comma_array
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: extract+keys+quotes
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: keys+comments
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: keys+bools+commas
+ ✓ tests/combinations.test.ts > TestRepairIdempotency > repair then repair is noop: fenced+quotes+bools+commas
+ ✓ tests/combinations.test.ts > TestSchemaValidationWithRepair > fenced+quotes+commas->user
+ ✓ tests/combinations.test.ts > TestSchemaValidationWithRepair > keys+quotes->user
+ ✓ tests/combinations.test.ts > TestSchemaValidationWithRepair > quotes+commas->scores
+ ✓ tests/combinations.test.ts > TestSchemaValidationWithRepair > extract+quotes+bools->config
+ ✓ tests/combinations.test.ts > TestSchemaValidationWithRepair > fenced+keys+comments->user
+ ✓ tests/combinations.test.ts > TestSchemaValidationWithRepair > keys+bools+commas->config
+ ✓ tests/combinations.test.ts > TestSchemaValidationWithRepair > extract+keys+quotes->user
+ ✓ tests/combinations.test.ts > TestSchemaValidationWithRepair > quotes+commas->tags
+ ✓ tests/combinations.test.ts > TestSchemaValidationWithRepair > fenced+commas->scores
+ ✓ tests/combinations.test.ts > TestSchemaValidationWithRepair > keys+bools+quotes+comments->config
+ ✓ tests/combinations.test.ts > TestSchemaValidationWithRepair > fenced+quotes+commas->tags
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse returns dict
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse returns list
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse repairs then returns
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse raises parse error on garbage
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse raises schema error
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse error is outputguard error
+ ✓ tests/apiContracts.test.ts > TestParseFunction > schema error is outputguard error
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse with nested object
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse with enum schema
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse rejects invalid enum
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse rejects number out of range
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse accepts number in range
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse rejects bad pattern
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse accepts good pattern
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse empty object matches empty schema
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse empty array matches array schema
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse with trailing comma repair
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse with single quotes repair
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse with unquoted keys repair
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse repairs but still fails schema
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse preserves data types
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse boolean values
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse null value
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse deeply nested
+ ✓ tests/apiContracts.test.ts > TestParseFunction > parse error message is string
+ ✓ tests/apiContracts.test.ts > TestValidationResult > valid result fields
+ ✓ tests/apiContracts.test.ts > TestValidationResult > invalid result has errors
+ ✓ tests/apiContracts.test.ts > TestValidationResult > repair result fields via validateAndRepair
+ ✓ tests/apiContracts.test.ts > TestValidationResult > multiple validation errors
+ ✓ tests/apiContracts.test.ts > TestValidationResult > error paths nested
+ ✓ tests/apiContracts.test.ts > TestValidationResult > valid result data is parsed
+ ✓ tests/apiContracts.test.ts > TestValidationResult > invalid json result
+ ✓ tests/apiContracts.test.ts > TestValidationResult > result is validation result
+ ✓ tests/apiContracts.test.ts > TestValidationResult > validation error has value field
+ ✓ tests/apiContracts.test.ts > TestValidationResult > validation error schema path
+ ✓ tests/apiContracts.test.ts > TestValidationResult > valid array schema
+ ✓ tests/apiContracts.test.ts > TestValidationResult > type mismatch root
+ ✓ tests/apiContracts.test.ts > TestValidationResult > additional properties allowed by default
+ ✓ tests/apiContracts.test.ts > TestValidationResult > missing required field
+ ✓ tests/apiContracts.test.ts > TestValidationResult > validate preserves original text
+ ✓ tests/apiContracts.test.ts > TestValidationResult > validateAndRepair already valid
+ ✓ tests/apiContracts.test.ts > TestValidationResult > validateAndRepair unrepairable
+ ✓ tests/apiContracts.test.ts > TestValidationResult > validateAndRepair repaired text is valid json
+ ✓ tests/apiContracts.test.ts > TestRepairResult > result not repaired
+ ✓ tests/apiContracts.test.ts > TestRepairResult > result repaired
+ ✓ tests/apiContracts.test.ts > TestRepairResult > result failed
+ ✓ tests/apiContracts.test.ts > TestRepairResult > result is repair result
+ ✓ tests/apiContracts.test.ts > TestRepairResult > repaired text is valid json
+ ✓ tests/apiContracts.test.ts > TestRepairResult > unrepaired text preserved
+ ✓ tests/apiContracts.test.ts > TestRepairResult > strategies applied is list
+ ✓ tests/apiContracts.test.ts > TestRepairResult > repair trailing comma
+ ✓ tests/apiContracts.test.ts > TestRepairResult > repair single quotes
+ ✓ tests/apiContracts.test.ts > TestRepairResult > repair unquoted keys
+ ✓ tests/apiContracts.test.ts > TestRepairResult > repair multiple issues
+ ✓ tests/apiContracts.test.ts > TestRepairResult > repair empty string fails
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report from repairer
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report confidence range
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report confidence positive for single strategy
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report confidence lower for many strategies
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report confidence zero on failure
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report confidence one for valid
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report diff present
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report no diff for valid
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report summary contains strategy
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report summary for valid
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report summary for failure
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report step diffs multi strategy
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report strategies applied list
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report strategies tried list
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report success flag on failure
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report parse error on failure
+ ✓ tests/apiContracts.test.ts > TestRepairReport > report steps are strategy applications
+ ✓ tests/apiContracts.test.ts > TestStrategyRegistry > all strategies count
+ ✓ tests/apiContracts.test.ts > TestStrategyRegistry > get strategy by name
+ ✓ tests/apiContracts.test.ts > TestStrategyRegistry > get strategy unknown raises
+ ✓ tests/apiContracts.test.ts > TestStrategyRegistry > get strategies none returns all
+ ✓ tests/apiContracts.test.ts > TestStrategyRegistry > get strategies subset
+ ✓ tests/apiContracts.test.ts > TestStrategyRegistry > get strategies empty list
+ ✓ tests/apiContracts.test.ts > TestStrategyRegistry > strategy functions are callable
+ ✓ tests/apiContracts.test.ts > TestStrategyRegistry > strategy handles empty string
+ ✓ tests/apiContracts.test.ts > TestStrategyRegistry > all strategies are objects with name and apply
+ ✓ tests/apiContracts.test.ts > TestStrategyRegistry > strategy order fix_encoding first
+ ✓ tests/apiContracts.test.ts > TestOutputGuardClass > default guard validate
+ ✓ tests/apiContracts.test.ts > TestOutputGuardClass > custom strategies ignores others
+ ✓ tests/apiContracts.test.ts > TestOutputGuardClass > custom strategies applies selected
+ ✓ tests/apiContracts.test.ts > TestOutputGuardClass > max repair attempts
+ ✓ tests/apiContracts.test.ts > TestOutputGuardClass > parse method
+ ✓ tests/apiContracts.test.ts > TestOutputGuardClass > parse method raises parse error
+ ✓ tests/apiContracts.test.ts > TestOutputGuardClass > parse method raises schema error
+ ✓ tests/apiContracts.test.ts > TestOutputGuardClass > retry prompt method
+ ✓ tests/apiContracts.test.ts > TestOutputGuardClass > validateAndRepair method
+ ✓ tests/apiContracts.test.ts > TestOutputGuardClass > repair with report
+ ✓ tests/apiContracts.test.ts > TestOutputGuardClass > repair without report
+ ✓ tests/apiContracts.test.ts > TestOutputGuardClass > guard validate invalid
+ ✓ tests/apiContracts.test.ts > TestOutputGuardClass > guard repair valid json
+ ✓ tests/apiContracts.test.ts > TestRetryPrompt > prompt contains errors
+ ✓ tests/apiContracts.test.ts > TestRetryPrompt > prompt contains schema info
+ ✓ tests/apiContracts.test.ts > TestRetryPrompt > prompt truncates long input
+ ✓ tests/apiContracts.test.ts > TestRetryPrompt > prompt has return instruction
+ ✓ tests/apiContracts.test.ts > TestRetryPrompt > prompt is string
+ ✓ tests/apiContracts.test.ts > TestRetryPrompt > prompt multiple errors
+ ✓ tests/apiContracts.test.ts > TestRetryPrompt > prompt empty errors
+ ✓ tests/apiContracts.test.ts > TestRetryPrompt > prompt includes original output
+ ✓ tests/apiContracts.test.ts > TestRetryPrompt > prompt short input not truncated
+ ✓ tests/apiContracts.test.ts > TestRetryPrompt > prompt with nested schema
+ ✓ tests/apiContracts.test.ts > TestRetryPrompt > prompt with array schema
+ ✓ tests/apiContracts.test.ts > TestRetryPrompt > prompt numbered errors
+ ✓ tests/apiContracts.test.ts > TestExceptionHierarchy > base exception
+ ✓ tests/apiContracts.test.ts > TestExceptionHierarchy > parse error inherits
+ ✓ tests/apiContracts.test.ts > TestExceptionHierarchy > schema error inherits
+ ✓ tests/apiContracts.test.ts > TestExceptionHierarchy > repair error inherits
+ ✓ tests/apiContracts.test.ts > TestExceptionHierarchy > parse error attributes
+ ✓ tests/apiContracts.test.ts > TestExceptionHierarchy > schema error attributes
+ ✓ tests/apiContracts.test.ts > TestExceptionHierarchy > repair error attributes
+ ✓ tests/apiContracts.test.ts > TestExceptionHierarchy > exceptions catchable by base
+ ✓ tests/apiContracts.test.ts > TestModelInterfaces > validation error fields
+ ✓ tests/apiContracts.test.ts > TestModelInterfaces > validation error default value
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```json
+{"a":1}
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```JSON
+{"a":1}
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```jsonc
+{"a":1}
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```javascript
+{"a":1}
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```js
+{"a":1}
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```
+{"a":1}
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```json  
+{"a":1}
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```json
+  {"a":1}  
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```json
+{"a":1}
+```
+
+Extra text after
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: Some preamble
+```json
+{"a":1}
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```json
+{"nested": {"b": [1,2,3]}}
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```typescript
+{"a":1}
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```python
+{"a":1}
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```json5
+{"a":1}
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```json
+{"a":1}
+```
+ ✓ tests/stress.test.ts > TestFenceVariations > fence_variants: ```json
+[1,2,3]
+```
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=name
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=name
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=result
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=value
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=data
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=key
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=step
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=quoted
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=a
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=answer
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=done
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=deep
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=items
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=x
+ ✓ tests/stress.test.ts > TestCommentaryExtraction > commentary_extraction: key=solo
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'a': True}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'a': False}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'a': None}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'a': True, 'b': False, 'c': None}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'key': 'value'}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'nested': {'a': True}}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'list': [True, False, None]}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'a': 1, 'b': 2,}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'a': true, 'b': False}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'x': {'y': 1,},}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'nums': [1, 2, 3,]}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'empty': {}}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'arr': []}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'s': 'hello world'}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_literals: {'n': 42, 'f': 3.14}
+ ✓ tests/stress.test.ts > TestPythonLiterals > python_with_commentary
+ ✓ tests/stress.test.ts > TestJavaScriptLiterals > js_literals: {key: "value"}
+ ✓ tests/stress.test.ts > TestJavaScriptLiterals > js_literals: {a: 1, b: 2, c: 3}
+ ✓ tests/stress.test.ts > TestJavaScriptLiterals > js_literals: {my_key: "val", other_key: 42}
+ ✓ tests/stress.test.ts > TestJavaScriptLiterals > js_literals: {key: "value", // comment
+}
+ ✓ tests/stress.test.ts > TestJavaScriptLiterals > js_literals: {items: [1, 2, 3]}
+ ✓ tests/stress.test.ts > TestJavaScriptLiterals > js_literals: {nested: {inner: "v"}}
+ ✓ tests/stress.test.ts > TestJavaScriptLiterals > js_literals: {flag: true, count: 0}
+ ✓ tests/stress.test.ts > TestJavaScriptLiterals > js_literals: {x: null, y: null}
+ ✓ tests/stress.test.ts > TestJavaScriptLiterals > js_literals: {msg: "hello world", n: -5}
+ ✓ tests/stress.test.ts > TestJavaScriptLiterals > js_literals: {arr: ["a", "b"], obj: {k: 1}}
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: {"name": "Ali
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: {"name": "Alice", "age":
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: {"name": "Alice", "age": 30, "hobbies": 
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: {"items": [{"id": 1}, {"id": 2
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: {"a": {"b": {"c": {"d": "deep
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: {"key": "value", 
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: {"data": [1, 2, 3
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: {"name": "Alice", "scores": [95, 87, 
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: [{"id": 1}, {"id": 2}, {"id":
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: {"config": {"enabled": true, "settings":
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: {"text": "Hello wor
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: {"items": [{"name": "Widget", "price": 1
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: [1, 2, 3, 
+ ✓ tests/stress.test.ts > TestTruncatedOutputs > truncated_produces_valid_json: {"x": [{"y": [
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: ```json
+{'a': 1,}
+```
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: ```json
+{a: True, b: None,}
+```
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: Here: {a: 'value', b: 42,}
+Done
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: ```json
+{name: 'Alice', age: 30,}
+```
+Le
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: Sure!
+{items: [1, 2, 3,], total: 3}
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: ```json
+{'x': 1, 'y': 2,}
+```
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: ```json
+{name: 'test', // comment
+}
+```
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: Here's your data: {'items': [True, False
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: ```json
+{"a": 1, /* comment */ "b": 2,}
+
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: Response:
+```json
+{'key': 'val',}
+```
+En
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: {a: 'x', b: 'y', // note
+}
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: ```json
+[{'id': 1}, {'id': 2},]
+```
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: Output: {'enabled': True, 'count': 5,}
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: ```javascript
+{name: 'test', active: Tru
+ ✓ tests/stress.test.ts > TestMultipleIssuesCombined > combined_issues_repaired: Here: [1, 2, 3,] done.
+ ✓ tests/stress.test.ts > TestAdversarialStrings > valid_json_preserved: {"url": "https://example.com/path?a=1&b=2#hash"}
+ ✓ tests/stress.test.ts > TestAdversarialStrings > valid_json_preserved: {"template": "Hello {{name}}, welcome!"}
+ ✓ tests/stress.test.ts > TestAdversarialStrings > valid_json_preserved: {"code": "if (x) { return y; }"}
+ ✓ tests/stress.test.ts > TestAdversarialStrings > valid_json_preserved: {"html": "<div class=\"test\\\">text</div>"}
+ ✓ tests/stress.test.ts > TestAdversarialStrings > valid_json_preserved: {"emoji": "Hello 👋🌍🎉"}
+ ✓ tests/stress.test.ts > TestAdversarialStrings > valid_json_preserved: {"chinese": "你好世界"}
+ ✓ tests/stress.test.ts > TestAdversarialStrings > valid_json_preserved: {"empty_strings": {"a": "", "b": "", "c": ""}}
+ ✓ tests/stress.test.ts > TestAdversarialStrings > valid_json_preserved: {"nulls": {"a": null, "b": null}}
+ ✓ tests/stress.test.ts > TestAdversarialStrings > valid_json_preserved: {"bools": {"a": true, "b": false}}
+ ✓ tests/stress.test.ts > TestAdversarialStrings > valid_json_preserved: {"numbers": {"int": 0, "neg": -1, "float": 3.14, "
+ ✓ tests/stress.test.ts > TestLargeInputs > large_object
+ ✓ tests/stress.test.ts > TestLargeInputs > large_array
+ ✓ tests/stress.test.ts > TestLargeInputs > large_fenced
+ ✓ tests/stress.test.ts > TestLargeInputs > deeply_nested
+ ✓ tests/stress.test.ts > TestLargeInputs > large_array_trailing_comma
+ ✓ tests/stress.test.ts > TestLargeInputs > large_fenced_trailing_commas
+ ✓ tests/stress.test.ts > TestSchemaValidation > schema_validation: {"name":"A","age":1} -> true
+ ✓ tests/stress.test.ts > TestSchemaValidation > schema_validation: {"name":"A"} -> false
+ ✓ tests/stress.test.ts > TestSchemaValidation > schema_validation: [1,2,3] -> true
+ ✓ tests/stress.test.ts > TestSchemaValidation > schema_validation: [1,"two",3] -> false
+ ✓ tests/stress.test.ts > TestSchemaValidation > schema_validation: {"x": 1.5} -> true
+ ✓ tests/stress.test.ts > TestSchemaValidation > schema_validation: {"x": 15} -> false
+ ✓ tests/stress.test.ts > TestSchemaValidation > schema_validation: {"status":"active"} -> true
+ ✓ tests/stress.test.ts > TestSchemaValidation > schema_validation: {"status":"unknown"} -> false
+ ✓ tests/stress.test.ts > TestSchemaValidation > schema_validation: {"tags": ["a", "b"]} -> true
+ ✓ tests/stress.test.ts > TestSchemaValidation > schema_validation: {"tags": []} -> false
+ ✓ tests/stress.test.ts > TestValidateAndRepairEndToEnd > succeeds: ```json
+{"name":"A","age":1}
+```
+ ✓ tests/stress.test.ts > TestValidateAndRepairEndToEnd > succeeds: {'name': 'A', 'age': 1}
+ ✓ tests/stress.test.ts > TestValidateAndRepairEndToEnd > succeeds: {name: "A", age: 1}
+ ✓ tests/stress.test.ts > TestValidateAndRepairEndToEnd > succeeds: {"name":"A","age":1,}
+ ✓ tests/stress.test.ts > TestValidateAndRepairEndToEnd > succeeds: Here: {"name":"A","age":1} done
+ ✓ tests/stress.test.ts > TestValidateAndRepairEndToEnd > succeeds: {name: 'A', age: 1, // person
+}
+ ✓ tests/stress.test.ts > TestValidateAndRepairEndToEnd > succeeds: ```json
+{name: 'A', age: 1,}
+```
+Enjoy!
+ ✓ tests/stress.test.ts > TestValidateAndRepairEndToEnd > succeeds: {"name":"A","age":1
+ ✓ tests/stress.test.ts > TestValidateAndRepairEndToEnd > schema_fail: {"name":"A","age":"not_int"}
+ ✓ tests/stress.test.ts > TestValidateAndRepairEndToEnd > schema_fail: {"name": 123, "age": 1}
+ ✓ tests/stress.test.ts > TestValidateAndRepairEndToEnd > schema_fail: {"age": 1}
+ ✓ tests/stress.test.ts > TestIdempotency > repair_idempotent: {"a": 1}
+ ✓ tests/stress.test.ts > TestIdempotency > repair_idempotent: {"name": "Alice", "age": 30}
+ ✓ tests/stress.test.ts > TestIdempotency > repair_idempotent: [1, 2, 3]
+ ✓ tests/stress.test.ts > TestIdempotency > repair_idempotent: {"nested": {"a": [1, 2]}}
+ ✓ tests/stress.test.ts > TestIdempotency > repair_idempotent: []
+ ✓ tests/stress.test.ts > TestIdempotency > repair_idempotent: {}
+ ✓ tests/stress.test.ts > TestIdempotency > repair_idempotent: {"a": null, "b": true, "c": false}
+ ✓ tests/stress.test.ts > TestIdempotency > repair_idempotent: {"k": "v", "n": 0}
+ ✓ tests/stress.test.ts > TestIdempotency > repair_idempotent: [{"id": 1}, {"id": 2}]
+ ✓ tests/stress.test.ts > TestIdempotency > double_repair_idempotent
+ ✓ tests/stress.test.ts > TestIdempotency > double_repair_python_bools
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > garbage_input: ""
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > garbage_input: "   "
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > garbage_input: "\n\n"
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > garbage_input: "\t"
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > garbage_input: "not json at all"
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > garbage_input: "random gibberish xyz"
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > garbage_input: "SELECT * FROM users"
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > garbage_input: "<html><body>Hello</body></htm
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > garbage_input: "# Markdown heading"
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > garbage_input: "def foo(): pass"
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > garbage_input: "console.log('hi')"
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > garbage_input: "---\ntitle: yaml\n---"
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > json_primitives: null
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > json_primitives: true
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > json_primitives: false
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > json_primitives: 42
+ ✓ tests/stress.test.ts > TestEmptyAndGarbage > json_primitives: "just a string"
+ ✓ tests/stress.test.ts > TestParseRaises > parse_success
+ ✓ tests/stress.test.ts > TestParseRaises > parse_repairs_and_returns
+ ✓ tests/stress.test.ts > TestParseRaises > parse_raises_parse_error
+ ✓ tests/stress.test.ts > TestParseRaises > parse_raises_schema_validation_error
+ ✓ tests/stress.test.ts > TestTrailingCommas > trailing_commas_fixed: {"a": 1,}
+ ✓ tests/stress.test.ts > TestTrailingCommas > trailing_commas_fixed: {"a": 1, "b": 2,}
+ ✓ tests/stress.test.ts > TestTrailingCommas > trailing_commas_fixed: [1, 2, 3,]
+ ✓ tests/stress.test.ts > TestTrailingCommas > trailing_commas_fixed: {"a": [1, 2,],}
+ ✓ tests/stress.test.ts > TestTrailingCommas > trailing_commas_fixed: {"a": {"b": 1,},}
+ ✓ tests/stress.test.ts > TestTrailingCommas > trailing_commas_fixed: [{"a": 1,}, {"b": 2,},]
+ ✓ tests/stress.test.ts > TestComments > comments_removed: {"a": 1} // comment
+ ✓ tests/stress.test.ts > TestComments > comments_removed: {"a": 1, // inline
+"b": 2}
+ ✓ tests/stress.test.ts > TestComments > comments_removed: /* header */
+{"a": 1}
+ ✓ tests/stress.test.ts > TestComments > comments_removed: {"a": 1, /* mid */ "b": 2}
+ ✓ tests/stress.test.ts > TestComments > comments_removed: {
+  // line comment
+  "a": 1
+}
+ ✓ tests/stress.test.ts > TestComments > comments_removed: {"a": 1} /* trailing block */
+ ✓ tests/stress.test.ts > TestRepairResultFields > strategies_applied_populated
+ ✓ tests/stress.test.ts > TestRepairResultFields > parse_error_on_failure
+ ✓ tests/stress.test.ts > TestRepairResultFields > no_parse_error_on_success
+ ✓ tests/stress.test.ts > TestRepairResultFields > text_field_always_set
+ ✓ tests/strategies/fixTruncated.test.ts > fix_truncated > mid-string
+ ✓ tests/strategies/fixTruncated.test.ts > fix_truncated > after colon
+ ✓ tests/strategies/fixTruncated.test.ts > fix_truncated > mid-array
+ ✓ tests/strategies/fixTruncated.test.ts > fix_truncated > after comma
+ ✓ tests/strategies/fixTruncated.test.ts > fix_truncated > nested
+ ✓ tests/strategies/fixTruncated.test.ts > fix_truncated > not truncated
+ ✓ tests/strategies/fixEncoding.test.ts > fix_encoding > replaces BPE space token
+ ✓ tests/strategies/fixEncoding.test.ts > fix_encoding > replaces BPE newline token
+ ✓ tests/strategies/fixEncoding.test.ts > fix_encoding > replaces BPE tab token
+ ✓ tests/strategies/fixEncoding.test.ts > fix_encoding > replaces BPE carriage return token
+ ✓ tests/strategies/fixEncoding.test.ts > fix_encoding > replaces multiple BPE tokens
+ ✓ tests/strategies/fixEncoding.test.ts > fix_encoding > returns unchanged text without BPE tokens
+ ✓ tests/strategies/fixEllipsis.test.ts > fix_ellipsis > as value
+ ✓ tests/strategies/fixEllipsis.test.ts > fix_ellipsis > in array
+ ✓ tests/strategies/fixEllipsis.test.ts > fix_ellipsis > standalone array
+ ✓ tests/strategies/fixEllipsis.test.ts > fix_ellipsis > standalone object
+ ✓ tests/strategies/fixEllipsis.test.ts > fix_ellipsis > in string preserved
+ ✓ tests/strategies/fixEllipsis.test.ts > fix_ellipsis > no ellipsis
+ ✓ tests/strategies/extractJson.test.ts > extract_json > extracts object
+ ✓ tests/strategies/extractJson.test.ts > extract_json > extracts array
+ ✓ tests/strategies/extractJson.test.ts > extract_json > nested braces
+ ✓ tests/strategies/extractJson.test.ts > extract_json > no json unchanged
+ ✓ tests/strategies/extractJson.test.ts > extract_json > with surrounding text
+ ✓ tests/strategies/stripFences.test.ts > strip_fences > removes json fence
+ ✓ tests/strategies/stripFences.test.ts > strip_fences > removes plain fence
+ ✓ tests/strategies/stripFences.test.ts > strip_fences > no fences unchanged
+ ✓ tests/strategies/stripFences.test.ts > strip_fences > multiple fences takes first
+ ✓ tests/strategies/stripFences.test.ts > strip_fences > jsonc fence
+ ✓ tests/strategies/stripFences.test.ts > strip_fences > javascript fence
+ ✓ tests/strategies/fixBooleans.test.ts > fix_booleans > True
+ ✓ tests/strategies/fixBooleans.test.ts > fix_booleans > False
+ ✓ tests/strategies/fixBooleans.test.ts > fix_booleans > None
+ ✓ tests/strategies/fixBooleans.test.ts > fix_booleans > in string preserved
+ ✓ tests/strategies/fixBooleans.test.ts > fix_booleans > already json
+ ✓ tests/strategies/fixValues.test.ts > fix_values > NaN
+ ✓ tests/strategies/fixValues.test.ts > fix_values > Infinity
+ ✓ tests/strategies/fixValues.test.ts > fix_values > -Infinity
+ ✓ tests/strategies/fixValues.test.ts > fix_values > undefined
+ ✓ tests/strategies/fixValues.test.ts > fix_values > NaN in string preserved
+ ✓ tests/strategies/fixKeys.test.ts > fix_keys > unquoted key
+ ✓ tests/strategies/fixKeys.test.ts > fix_keys > underscore key
+ ✓ tests/strategies/fixKeys.test.ts > fix_keys > already quoted
+ ✓ tests/strategies/fixKeys.test.ts > fix_keys > multiple keys
+ ✓ tests/strategies/removeComments.test.ts > remove_comments > single line comment
+ ✓ tests/strategies/removeComments.test.ts > remove_comments > multi line comment
+ ✓ tests/strategies/removeComments.test.ts > remove_comments > url preserved
+ ✓ tests/strategies/removeComments.test.ts > remove_comments > no comments unchanged
+ ✓ tests/strategies/fixQuotes.test.ts > fix_quotes > single quotes
+ ✓ tests/strategies/fixQuotes.test.ts > fix_quotes > mixed quotes
+ ✓ tests/strategies/fixQuotes.test.ts > fix_quotes > already double
+ ✓ tests/strategies/fixCommas.test.ts > fix_commas > trailing comma object
+ ✓ tests/strategies/fixCommas.test.ts > fix_commas > trailing comma array
+ ✓ tests/strategies/fixCommas.test.ts > fix_commas > nested trailing
+ ✓ tests/strategies/fixCommas.test.ts > fix_commas > no trailing unchanged
+ ✓ tests/strategies/fixClosers.test.ts > fix_closers > missing brace
+ ✓ tests/strategies/fixClosers.test.ts > fix_closers > missing bracket and brace
+ ✓ tests/strategies/fixClosers.test.ts > fix_closers > already balanced
+ ✓ tests/strategies/fixNewlines.test.ts > fix_newlines > literal newline in string
+ ✓ tests/strategies/fixNewlines.test.ts > fix_newlines > no newlines unchanged
+ ✓ tests/strategies/fixUnicode.test.ts > fix_unicode > hex escape
+ ✓ tests/strategies/fixUnicode.test.ts > fix_unicode > valid unicode preserved
+ ✓ tests/strategies/fixUnicode.test.ts > fix_unicode > no escapes unchanged
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 0
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 1
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 2
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 3
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 4
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 5
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 6
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 7
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 8
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 9
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 10
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 11
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 12
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 13
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 14
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 15
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 16
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 17
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 18
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 19
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 20
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 21
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 22
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 23
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 24
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 25
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 26
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 27
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 28
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 29
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 30
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 31
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 32
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 33
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 34
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 35
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 36
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 37
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 38
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 39
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 40
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 41
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 42
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 43
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 44
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair never crashes > chaotic input 45
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 0
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 1
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 2
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 3
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 4
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 5
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 6
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 7
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 8
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 9
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 10
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 11
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 12
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 13
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 14
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 15
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 16
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 17
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 18
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 19
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 20
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 21
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 22
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 23
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 24
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 25
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 26
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 27
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 28
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 29
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 30
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 31
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 32
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 33
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 34
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 35
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 36
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 37
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 38
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 39
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 40
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 41
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 42
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 43
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 44
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > raw repair never crashes > chaotic input 45
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 0
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 1
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 2
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 3
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 4
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 5
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 6
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 7
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 8
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 9
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 10
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 11
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 12
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 13
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 14
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 15
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 16
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 17
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 18
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 19
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 20
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 21
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 22
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 23
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 24
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 25
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 26
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 27
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 28
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 29
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 30
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 31
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 32
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 33
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 34
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 35
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 36
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 37
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 38
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 39
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 40
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 41
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 42
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 43
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 44
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > strategies never crash > chaotic input 45
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > repair with report never crashes
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > validateAndRepair never crashes
+ ✓ tests/adversarial.test.ts > TestNeverCrashes > random bytes never crash
+ ✓ tests/adversarial.test.ts > TestPerformance > large input performance
+ ✓ tests/adversarial.test.ts > TestPerformance > deeply nested performance
+ ✓ tests/adversarial.test.ts > TestPerformance > many strategies needed performance
+ ✓ tests/adversarial.test.ts > TestPerformance > large fenced performance 1117ms
+ ✓ tests/adversarial.test.ts > TestPerformance > long string with newlines performance
+ ✓ tests/adversarial.test.ts > TestPerformance > many trailing commas performance
+ ✓ tests/adversarial.test.ts > TestPerformance > large array performance
+ ✓ tests/adversarial.test.ts > TestPerformance > many single quote keys performance
+ ✓ tests/adversarial.test.ts > TestPerformance > repeated validateAndRepair performance
+ ✓ tests/adversarial.test.ts > TestPerformance > broken brackets performance
+ ✓ tests/adversarial.test.ts > TestPerformance > comments heavy performance
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "{"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "}"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "["
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "]"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "\""
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "'"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char ","
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char ":"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "\\"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "/"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "."
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "!"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "?"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "#"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "@"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char " "
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "\n"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "\t"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "\r"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > single char > char "\u0000"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > minimal valid JSON > minimal: 0
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > minimal valid JSON > minimal: 1
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > minimal valid JSON > minimal: -1
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > minimal valid JSON > minimal: 0.5
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > minimal valid JSON > minimal: ""
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > minimal valid JSON > minimal: null
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > minimal valid JSON > minimal: true
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > minimal valid JSON > minimal: false
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > minimal valid JSON > minimal: {}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > minimal valid JSON > minimal: []
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > minimal valid JSON > minimal: "x"
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > almost valid > almost: {"a": }
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > almost valid > almost: {"a": 1, }
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > almost valid > almost: {"a" 1}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > almost valid > almost: {: 1}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > almost valid > almost: {"a": 1
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > almost valid > almost: [1, 2,]
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > almost valid > almost: [,]
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > almost valid > almost: {,}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > almost valid > almost: {"a": 1,,}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > unicode preserved > unicode: {"a": "café"}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > unicode preserved > unicode: {"a": "你好"}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > unicode preserved > unicode: {"a": "مرحبا"}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > unicode preserved > unicode: {"a": "🎉🎊🎈"}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > unicode preserved > unicode: {"a": "\ud83d\ude00"}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > unicode preserved > unicode: {"a": "\u0000"}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > unicode preserved > unicode: {"a": "Ω≈ç√∫"}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > unicode preserved > unicode: {"a": "→←↑↓"}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > unicode preserved > unicode: {"a": "\n\t\r"}
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > empty object with whitespace
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > empty array with whitespace
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > only whitespace between brackets
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > max int
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > negative max int
+ ✓ tests/adversarial.test.ts > TestBoundaryConditions > float precision
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > fenced data preserved > case 0
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > fenced data preserved > case 1
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > fenced data preserved > case 2
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > fenced data preserved > case 3
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > fenced data preserved > case 4
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > fenced data preserved > case 5
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > fenced data preserved > case 6
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > fenced data preserved > case 7
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > commentary data preserved > case 0
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > commentary data preserved > case 1
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > commentary data preserved > case 2
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > trailing comma data preserved
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > single quotes data preserved
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > python booleans data preserved
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > unquoted keys data preserved
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > NaN replaced data preserved
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > large nested preserved
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > array of objects preserved
+ ✓ tests/adversarial.test.ts > TestNoDataLoss > empty structures preserved
+ ✓ tests/adversarial.test.ts > TestConcurrentSafety > concurrent repairs via Promise.all
+ ✓ tests/adversarial.test.ts > TestConcurrentSafety > concurrent validates via Promise.all
+ ✓ tests/adversarial.test.ts > TestConcurrentSafety > concurrent different strategies
+ ✓ tests/adversarial.test.ts > TestConcurrentSafety > concurrent raw repair
+ ✓ tests/adversarial.test.ts > TestConcurrentSafety > concurrent parse
+ ✓ tests/adversarial.test.ts > TestConcurrentSafety > concurrent mixed valid invalid
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > json inside json string
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > base64 in string
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > very long key
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > empty array values
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > scientific notation
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > negative zero
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > json with BOM
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > windows line endings
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > tab indented json
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > mixed indentation
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > multiple json blocks
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > json preceded by html
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > json with markdown bold
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > string that looks like number
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > url with special chars
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > multiline string value
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > escaped backslashes
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > null values in array
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > boolean string not converted
+ ✓ tests/adversarial.test.ts > TestSpecialPatterns > number as key in quotes
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > repeated pairs > pair: "{}"
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > repeated pairs > pair: "[]"
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > repeated pairs > pair: "\"\""
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > repeated pairs > pair: "  "
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > repeated pairs > pair: ",,"
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > repeated pairs > pair: "::"
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > repeated pairs > pair: "//"
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > repeated pairs > pair: "**"
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > repeated pairs > pair: "``"
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > alternating brackets
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > json with control chars
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > only commas
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > only colons
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > mixed quote styles
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > triple quoted value
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > javascript undefined
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > multiple fenced blocks
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > fenced block wrong language
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > incomplete fence
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > fence with extra backticks
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > bare non-json tokens > token: NaN
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > bare non-json tokens > token: Infinity
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > bare non-json tokens > token: -Infinity
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > bare non-json tokens > token: undefined
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > bare non-json tokens > token: None
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > bare non-json tokens > token: True
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > bare non-json tokens > token: False
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > extremely long number
+ ✓ tests/adversarial.test.ts > TestFuzzingPatterns > all escape sequences
+ ✓ tests/adversarial.test.ts > TestRobustnessInvariants > repair is idempotent for valid json
+ ✓ tests/adversarial.test.ts > TestRobustnessInvariants > repair result always has text
+ ✓ tests/adversarial.test.ts > TestRobustnessInvariants > strategiesApplied is array
+ ✓ tests/adversarial.test.ts > TestRobustnessInvariants > repaired false means unchanged or unfixable
+ ✓ tests/adversarial.test.ts > TestRobustnessInvariants > repaired true means valid json
+
+ Test Files  29 passed (29)
+      Tests  1113 passed (1113)
+   Start at  21:32:13
+   Duration  1.86s (transform 568ms, setup 0ms, collect 1.63s, tests 1.79s, environment 2ms, prepare 1.20s)
+
