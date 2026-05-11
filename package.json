@@ -1,6 +1,6 @@
 {
   "name": "outputguard",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Validate, repair, and retry LLM structured outputs",
   "type": "module",
   "main": "dist/index.js",
