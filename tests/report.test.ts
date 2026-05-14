@@ -97,6 +97,38 @@ describe("TestReport", () => {
     expect(stepDiffs).not.toContain("fix_commas");
   });
 
+  it("getDiff handles added lines (final longer than original)", () => {
+    const report = createReport("line1", "line1\nline2", true, [
+      { name: "s", changed: true, inputText: "line1", outputText: "line1\nline2" },
+    ]);
+    const diff = getDiff(report);
+    expect(diff).toContain("+line2");
+  });
+
+  it("getDiff handles removed lines (original longer than final)", () => {
+    const report = createReport("line1\nline2", "line1", true, [
+      { name: "s", changed: true, inputText: "line1\nline2", outputText: "line1" },
+    ]);
+    const diff = getDiff(report);
+    expect(diff).toContain("-line2");
+  });
+
+  it("getStepDiffs handles added lines in step", () => {
+    const report = createReport("a", "a\nb", true, [
+      { name: "expand", changed: true, inputText: "a", outputText: "a\nb" },
+    ]);
+    const verbose = getStepDiffs(report);
+    expect(verbose).toContain("+b");
+  });
+
+  it("getStepDiffs handles removed lines in step", () => {
+    const report = createReport("a\nb", "a", true, [
+      { name: "shrink", changed: true, inputText: "a\nb", outputText: "a" },
+    ]);
+    const verbose = getStepDiffs(report);
+    expect(verbose).toContain("-b");
+  });
+
   it("step diffs multi strategy", () => {
     const report = createReport(
       "in",

@@ -241,6 +241,148 @@ describe("format support", () => {
     expect(() => validate("{}", SIMPLE_SCHEMA, { format: "xml" })).toThrow(/Unsupported format/);
   });
 
+  it("formatLabel for forced-json-off", async () => {
+    const { formatLabel } = await import("../src/formats.js");
+    expect(formatLabel("forced-json-off")).toBe("forced-JSON-off structured output");
+  });
+
+  it("formatLabel for auto", async () => {
+    const { formatLabel } = await import("../src/formats.js");
+    expect(formatLabel("auto")).toBe("structured output");
+  });
+
+  it("auto format fails with all parsers", async () => {
+    const { parseDocument } = await import("../src/formats.js");
+    // YAML parses bare strings, so we need something that breaks all parsers
+    // A bare tab character in YAML is invalid
+    expect(() => parseDocument("\t: [\t", "auto")).toThrow();
+  });
+
+  it("auto format validates invalid", () => {
+    const result = validate("<<<not any format>>>", { type: "object" }, { format: "auto" });
+    expect(result.valid).toBe(false);
+  });
+
+  describe("PythonLiteralParser edge cases", () => {
+    it("parses tuples", () => {
+      const result = validate("{'items': (1, 2, 3)}", { type: "object", properties: { items: { type: "array" } } }, { format: "python" });
+      expect(result.valid).toBe(true);
+      expect(result.data).toEqual({ items: [1, 2, 3] });
+    });
+
+    it("parses string escape sequences", () => {
+      const result = validate("{'a': 'tab\\there\\r\\n\\b\\f'}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(true);
+    });
+
+    it("parses unicode escape in string", () => {
+      const result = validate("{'a': '\\u0041'}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(true);
+      expect((result.data as Record<string, string>).a).toBe("A");
+    });
+
+    it("rejects invalid unicode escape", () => {
+      const result = validate("{'a': '\\uxyz0'}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(false);
+    });
+
+    it("parses positive number with + prefix", () => {
+      const result = validate("{'a': +5}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(true);
+      expect((result.data as Record<string, number>).a).toBe(5);
+    });
+
+    it("parses number with leading dot", () => {
+      const result = validate("{'a': .5}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(true);
+      expect((result.data as Record<string, number>).a).toBe(0.5);
+    });
+
+    it("parses numbers with underscores", () => {
+      const result = validate("{'a': 1_000}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(true);
+      expect((result.data as Record<string, number>).a).toBe(1000);
+    });
+
+    it("parses scientific notation", () => {
+      const result = validate("{'a': 1e3}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(true);
+      expect((result.data as Record<string, number>).a).toBe(1000);
+    });
+
+    it("rejects unknown identifier", () => {
+      const result = validate("{'a': undefined}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(false);
+    });
+
+    it("rejects trailing content", () => {
+      const result = validate("{'a': 1} extra", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(false);
+    });
+
+    it("rejects unterminated string", () => {
+      const result = validate("{'a': 'unterminated", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(false);
+    });
+
+    it("handles empty dict", () => {
+      const result = validate("{}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(true);
+      expect(result.data).toEqual({});
+    });
+
+    it("handles empty list", () => {
+      const result = validate("[]", { type: "array" }, { format: "python" });
+      expect(result.valid).toBe(true);
+      expect(result.data).toEqual([]);
+    });
+
+    it("handles empty tuple", () => {
+      const result = validate("()", { type: "array" }, { format: "python" });
+      expect(result.valid).toBe(true);
+      expect(result.data).toEqual([]);
+    });
+
+    it("handles trailing comma in dict", () => {
+      const result = validate("{'a': 1,}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(true);
+    });
+
+    it("handles trailing comma in list", () => {
+      const result = validate("[1, 2,]", { type: "array" }, { format: "python" });
+      expect(result.valid).toBe(true);
+    });
+
+    it("parses None", () => {
+      const result = validate("{'a': None}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(true);
+      expect((result.data as Record<string, unknown>).a).toBeNull();
+    });
+
+    it("parses True and False", () => {
+      const result = validate("{'a': True, 'b': False}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(true);
+      const data = result.data as Record<string, boolean>;
+      expect(data.a).toBe(true);
+      expect(data.b).toBe(false);
+    });
+
+    it("rejects invalid value start character", () => {
+      const result = validate("{'a': @bad}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(false);
+    });
+
+    it("default escape passthrough in string", () => {
+      const result = validate("{'a': '\\a'}", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(true);
+    });
+
+    it("handles unterminated escape at end of string", () => {
+      const result = validate("{'a': 'val\\", { type: "object" }, { format: "python" });
+      expect(result.valid).toBe(false);
+    });
+  });
+
   it("retry prompt names target format", () => {
     const result = validate("name: Alice\n", SIMPLE_SCHEMA, { format: "yaml" });
     const prompt = retryPrompt("name: Alice\n", SIMPLE_SCHEMA, result.errors, { format: "yaml" });

@@ -43,6 +43,51 @@ describe("TestRetryPrompt", () => {
     expect(prompt.length).toBeLessThan(longText.length + 500);
   });
 
+  it("describes nested object properties in schema", () => {
+    const schema = {
+      type: "object",
+      properties: {
+        user: {
+          type: "object",
+          properties: {
+            name: { type: "string" },
+          },
+          required: ["name"],
+        },
+      },
+      required: ["user"],
+    };
+    const errors: ValidationError[] = [
+      { message: "missing", path: "$", schemaPath: "required" },
+    ];
+    const prompt = retryPrompt("{}", schema, errors);
+    expect(prompt).toContain("user");
+    expect(prompt).toContain("name");
+    expect(prompt).toContain("Contains properties");
+  });
+
+  it("describes nested array items in schema", () => {
+    const schema = {
+      type: "object",
+      properties: {
+        items: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              id: { type: "integer" },
+            },
+          },
+        },
+      },
+    };
+    const errors: ValidationError[] = [
+      { message: "err", path: "$", schemaPath: "" },
+    ];
+    const prompt = retryPrompt("{}", schema, errors);
+    expect(prompt).toContain("id");
+  });
+
   it("can omit message history", () => {
     const errors: ValidationError[] = [
       { message: "err", path: "$", schemaPath: "" },

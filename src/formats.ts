@@ -100,8 +100,6 @@ function parseWithFormat(text: string, format: CanonicalFormat): unknown {
         return parseToml(text);
       case "python":
         return new PythonLiteralParser(text).parse();
-      case "auto":
-        return parseAuto(text);
     }
   } catch (error) {
     throw new FormatParseError(error instanceof Error ? error.message : String(error));

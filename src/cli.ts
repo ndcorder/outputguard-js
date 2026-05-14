@@ -13,19 +13,19 @@ const RESET = "\x1b[0m";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-function getVersion(): string {
+export function getVersion(): string {
   const pkg = JSON.parse(readFileSync(join(__dirname, "..", "package.json"), "utf-8"));
   return pkg.version as string;
 }
 
-function readInput(inputArg: string): string {
+export function readInput(inputArg: string): string {
   if (inputArg === "-") {
     return readFileSync("/dev/stdin", "utf-8");
   }
   return readFileSync(resolve(inputArg), "utf-8");
 }
 
-function parseArgs(argv: string[]): { command: string; args: string[]; flags: Record<string, string | boolean> } {
+export function parseArgs(argv: string[]): { command: string; args: string[]; flags: Record<string, string | boolean> } {
   const command = argv[0] ?? "";
   const args: string[] = [];
   const flags: Record<string, string | boolean> = {};
@@ -61,7 +61,7 @@ function parseArgs(argv: string[]): { command: string; args: string[]; flags: Re
   return { command, args, flags };
 }
 
-function printHelp(): void {
+export function printHelp(): void {
   console.log(`${BOLD}outputguard${RESET} — Validate, repair, and retry LLM structured outputs
 
 ${BOLD}Usage:${RESET}
@@ -91,7 +91,7 @@ ${BOLD}Options:${RESET}
 `);
 }
 
-async function cmdValidate(args: string[], flags: Record<string, string | boolean>): Promise<number> {
+export async function cmdValidate(args: string[], flags: Record<string, string | boolean>): Promise<number> {
   const { OutputGuard } = await import("./guard.js");
   const { getDiff, getStepDiffs, getConfidence } = await import("./report.js");
 
@@ -181,7 +181,7 @@ async function cmdValidate(args: string[], flags: Record<string, string | boolea
   return 1;
 }
 
-async function cmdRepair(args: string[], flags: Record<string, string | boolean>): Promise<number> {
+export async function cmdRepair(args: string[], flags: Record<string, string | boolean>): Promise<number> {
   const { OutputGuard } = await import("./guard.js");
   const { getDiff, getStepDiffs, getConfidence } = await import("./report.js");
 
@@ -254,7 +254,7 @@ async function cmdRepair(args: string[], flags: Record<string, string | boolean>
   return 1;
 }
 
-async function cmdRetryPrompt(args: string[], flags: Record<string, string | boolean>): Promise<number> {
+export async function cmdRetryPrompt(args: string[], flags: Record<string, string | boolean>): Promise<number> {
   const { OutputGuard } = await import("./guard.js");
 
   const inputArg = args[0];
@@ -289,7 +289,7 @@ async function cmdRetryPrompt(args: string[], flags: Record<string, string | boo
   return 0;
 }
 
-async function cmdBatch(args: string[], flags: Record<string, string | boolean>): Promise<number> {
+export async function cmdBatch(args: string[], flags: Record<string, string | boolean>): Promise<number> {
   const { validateBatch } = await import("./batch.js");
 
   const inputArg = args[0];
@@ -337,7 +337,7 @@ async function cmdBatch(args: string[], flags: Record<string, string | boolean>)
   return summary.invalid === 0 ? 0 : 1;
 }
 
-async function cmdStrategies(): Promise<number> {
+export async function cmdStrategies(): Promise<number> {
   const { ALL_STRATEGIES } = await import("./strategies/index.js");
 
   console.log(`${BOLD}Available repair strategies:${RESET}\n`);
@@ -396,7 +396,11 @@ async function main(): Promise<void> {
   process.exit(exitCode);
 }
 
-main().catch((err: unknown) => {
-  console.error(`${RED}${(err as Error).message}${RESET}`);
-  process.exit(1);
-});
+const __filename = fileURLToPath(import.meta.url);
+
+if (process.argv[1] === __filename) {
+  main().catch((err: unknown) => {
+    console.error(`${RED}${(err as Error).message}${RESET}`);
+    process.exit(1);
+  });
+}
